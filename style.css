@@ -1,285 +1,38 @@
-/* style.css */
-body {
-  margin: 0;
-  font-family: 'Quicksand', sans-serif;
-  background-image: url("cloud.nen.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
+const passwordInput = document.getElementById('passwordInput');
+const submitBtn = document.getElementById('submitPassword');
+const errorMessage = document.getElementById('errorMessage');
+const passwordScreen = document.getElementById('passwordScreen');
+const videoContainer = document.getElementById('videoContainer');
+const girlVideo = document.getElementById('girlVideo');
+const dreamyVideo = document.getElementById('dreamyVideo');
+const bgMusic = document.getElementById('bgMusic');
+const openGiftButton = document.getElementById('openGiftButton');
+const giftImage = document.getElementById('giftImage');
 
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(to bottom, #e8f0ff, #fbefff);
-  color: #555;
-}
+submitBtn.addEventListener('click', () => {
+  const input = passwordInput.value.trim();
 
-/* Giao diện nhập mật khẩu */
-.password-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(200, 200, 255, 0.5);
-  animation: fadeIn 2s ease;
-}
+  if (input !== 'Milk10/6') {
+    errorMessage.innerText = '🥺 Mật khẩu sai rồi nè!';
+    return;
+  }
 
-input[type="password"] {
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  width: 70%;
-  font-size: 16px;
-  outline: none;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  background-color: #fdfaff;
-}
+  // Mật khẩu đúng → vào trang chính
+  passwordScreen.style.display = 'none';
+  videoContainer.style.display = 'block';
+  girlVideo.play();
+  bgMusic.play();
 
-button {
-  margin-top: 15px;
-  padding: 10px 25px;
-  border: none;
-  border-radius: 12px;
-  background-color: #dcb8ff;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(220, 184, 255, 0.5);
-  transition: background-color 0.3s, transform 0.3s;
-}
+  setTimeout(() => {
+    girlVideo.style.display = 'none';
+    dreamyVideo.style.display = 'block';
+  }, 7000); // Sau 7s thì chuyển sang nền dreamy loop
 
-button:hover {
-  background-color: #c7a6f7;
-  transform: scale(1.05);
-}
+  setTimeout(() => {
+    openGiftButton.style.display = 'block';
+  }, 12000); // Sau 12s thì hiện nút mở quà
+});
 
-/* Hiệu ứng fadeIn */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Hiệu ứng fadeInOut */
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(20px); }
-  10% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-20px); }
-}
-
-/* Lời chúc */
-.message-box {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fff0ff;
-  font-size: 26px;
-  font-weight: 500;
-  text-align: center;
-  text-shadow: 0 0 10px #fff, 0 0 20px #ccf;
-  z-index: 2;
-  animation: fadeInOut 10s ease-in-out forwards;
-}
-
-.final-message {
-  font-size: 28px;
-  color: #ffccff;
-  text-shadow: 0 0 10px #fff0ff;
-  animation: fadeIn 3s ease-in-out;
-}
-
-/* Video chính */
-#videoContainer {
-  display: none;
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #fff;
-}
-
-video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-/* Nút mở quà */
-#openGiftButton {
-  display: none;
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  background: linear-gradient(135deg, #ffffff, #ccf0ff, #fbefff);
-  color: #884488;
-  border-radius: 30px;
-  box-shadow: 0 0 15px rgba(200, 180, 255, 0.5);
-  animation: floatButton 3s ease-in-out infinite;
-  z-index: 2;
-  transition: background 0.5s ease;
-}
-
-#openGiftButton:hover {
-  background: linear-gradient(135deg, #fbefff, #ccf0ff, #ffffff);
-}
-
-@keyframes floatButton {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -10px); }
-}
-
-#giftImage {
-  display: none;
-  max-width: 80%;
-  max-height: 80vh;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 200, 250, 0.6);
-  z-index: 2;
-}
-
-/* Mây bồng bềnh */
-.floating-cloud {
-  position: absolute;
-  background: url('images.jpeg') no-repeat;
-  background-size: contain;
-  width: 200px;
-  height: 100px;
-  animation: cloudMove 90s linear infinite;
-  opacity: 0.7;
-  z-index: 1;
-}
-.cloud1 { top: 20%; left: -250px; animation-delay: 0s; }
-.cloud2 { top: 40%; left: -200px; animation-delay: 15s; }
-.cloud3 { top: 60%; left: -300px; animation-delay: 30s; }
-
-@keyframes cloudMove {
-  0% { left: -300px; }
-  100% { left: 110%; }
-}
-
-/* Bướm bay */
-.butterfly {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: url('butterfly-new.png') no-repeat;
-  background-size: contain;
-  animation: butterflyFly 20s ease-in-out infinite;
-  z-index: 2;
-  opacity: 0.8;
-}
-.butterfly1 { top: 60%; left: 10%; animation-delay: 0s; }
-.butterfly2 { top: 70%; left: 30%; animation-delay: 5s; }
-.butterfly3 { top: 50%; left: 60%; animation-delay: 10s; }
-
-@keyframes butterflyFly {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(30px, -50px) rotate(30deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
-}
-
-/* Cầu vồng mờ mờ */
-.soft-rainbow {
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  width: 600px;
-  height: 300px;
-  background: conic-gradient(from 180deg at center, #ffd6ff, #e0ffff, #ffffcc, #ffd6ff);
-  border-radius: 50% / 100%;
-  transform: translateX(-50%);
-  opacity: 0.35;
-  filter: blur(1px);
-  animation: rainbowPulse 6s ease-in-out infinite alternate;
-  z-index: 1;
-}
-
-@keyframes rainbowPulse {
-  0% { opacity: 0.25; transform: translateX(-50%) scale(1); }
-  100% { opacity: 0.4; transform: translateX(-50%) scale(1.05); }
-}
-
-
-@keyframes glow {
-  from { opacity: 0.2; }
-  to { opacity: 0.6; }
-}
-
-/* Bụi sáng */
-.sparkle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #fff;
-  opacity: 0.8;
-  animation: sparkleBlink 3s infinite;
-}
-.sparkle1 { top: 30%; left: 40%; animation-delay: 0s; }
-.sparkle2 { top: 50%; left: 60%; animation-delay: 1.5s; }
-.sparkle3 { top: 65%; left: 25%; animation-delay: 3s; }
-
-@keyframes sparkleBlink {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.3); }
-}
-
-/* Hiệu ứng bụi phép bay quanh đếm ngược */
-.magic-dust {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, white, #ccfaff);
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: floatDust 5s linear infinite;
-  box-shadow: 0 0 6px #ccfaff;
-  z-index: 2;
-}
-
-@keyframes floatDust {
-  0% { transform: translateY(0) scale(1); opacity: 0.6; }
-  50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
-  100% { transform: translateY(0) scale(1); opacity: 0.6; }
-}
-
-/* Đếm ngược */
-#countdown {
-  animation: pulseLight 1s infinite;
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: #8888cc;
-  text-shadow: 0 0 5px white;
-  animation: glow 1s infinite alternate;
-  padding: 10px 20px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 10px rgba(200, 200, 255, 0...
-.sparkle4 { top: 20%; left: 70%; animation-delay: 2.5s; }
-.sparkle5 { top: 80%; left: 50%; animation-delay: 4s; }
-.sparkle6 { top: 40%; left: 10%; animation-delay: 3.5s; }
-
+openGiftButton.addEventListener('click', () => {
+  giftImage.style.display = giftImage.style.display === 'block' ? 'none' : 'block';
+});
