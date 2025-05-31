@@ -1,6 +1,5 @@
 const passwordInput = document.getElementById('passwordInput');
 const submitBtn = document.getElementById('submitPassword');
-const countdown = document.getElementById('timeLeft');
 const errorMessage = document.getElementById('errorMessage');
 const passwordScreen = document.getElementById('passwordScreen');
 const videoContainer = document.getElementById('videoContainer');
@@ -10,42 +9,15 @@ const bgMusic = document.getElementById('bgMusic');
 const openGiftButton = document.getElementById('openGiftButton');
 const giftImage = document.getElementById('giftImage');
 
-function updateCountdown() {
-  const now = new Date();
-  const releaseDate = new Date('2025-06-10T00:00:00');
-  const diff = releaseDate - now;
-
-  if (diff <= 0) {
-    countdown.innerText = '🎉 Đã đến ngày mở quà!';
-    passwordInput.disabled = false;
-    submitBtn.disabled = false;
-  } else {
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    countdown.innerText = `${days} ngày ${hours}h ${minutes}m ${seconds}s`;
-  }
-}
-
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
 submitBtn.addEventListener('click', () => {
   const input = passwordInput.value.trim();
-  const now = new Date();
-  const unlockDate = new Date('2025-06-10T00:00:00');
 
   if (input !== 'Milk10/6') {
-    errorMessage.innerText = '❌ Mật khẩu sai rồi nè!';
+    errorMessage.innerText = '🥺 Mật khẩu sai rồi nè!';
     return;
   }
 
-  if (now < unlockDate) {
-    errorMessage.innerText = '📅 Món quà có thể mở vào ngày 10/6 nhé!';
-    return;
-  }
-
+  // Mật khẩu đúng → vào trang chính
   passwordScreen.style.display = 'none';
   videoContainer.style.display = 'block';
   girlVideo.play();
@@ -54,28 +26,13 @@ submitBtn.addEventListener('click', () => {
   setTimeout(() => {
     girlVideo.style.display = 'none';
     dreamyVideo.style.display = 'block';
-  }, 7000);
+  }, 7000); // Sau 7s thì chuyển sang nền dreamy loop
 
   setTimeout(() => {
     openGiftButton.style.display = 'block';
-  }, 12000);
+  }, 12000); // Sau 12s thì hiện nút mở quà
 });
 
 openGiftButton.addEventListener('click', () => {
   giftImage.style.display = giftImage.style.display === 'block' ? 'none' : 'block';
 });
-button:active {
-  transform: scale(0.95);
-}
-button {
-  padding: 10px 20px;
-  background: linear-gradient(to right, #c6f1ff, #f5d1ff);
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-  color: #333;
-  box-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
-  animation: glowButton 2s ease-in-out infinite alternate;
-  transition: transform 0.3s ease;
-}
