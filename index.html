@@ -2,25 +2,27 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Món quà nhỏ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎁 Món Quà Mộng Mơ 🎂</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Giao diện nhập mật khẩu -->
+  <!-- Màn hình nhập mật khẩu -->
   <div id="passwordScreen">
-    <h1>🔒 Nhập mật khẩu để mở món quà</h1>
-    <input type="password" id="passwordInput" placeholder="Nhập mật khẩu..." />
-    <button id="submitPassword">Mở quà</button>
-    <p id="errorMessage"></p>
+    <div class="cloud-container">
+      <h2>⏳ Còn lại:</h2>
+      <div id="timeLeft" class="countdown"></div>
+      <input type="password" id="passwordInput" placeholder="Nhập mật khẩu..." />
+      <button id="submitPassword">Mở quà ✨</button>
+      <div id="errorMessage" class="error"></div>
+    </div>
   </div>
 
-  <!-- Giao diện chính khi mở quà -->
+  <!-- Màn hình video -->
   <div id="videoContainer" style="display: none;">
     <video id="girlVideo" src="milkdream.mp4" autoplay muted></video>
-    <video id="dreamyVideo" src="dreamy-video.mp4" loop muted style="display: none;"></video>
+    <video id="dreamyVideo" src="dreamy-video.mp4" muted loop style="display: none;"></video>
     <audio id="bgMusic" src="You-Vietra.mp3" loop></audio>
-
     <button id="openGiftButton" style="display: none;">🎁 Mở quà dành riêng cho cậu</button>
     <img id="giftImage" src="gift-image.png" style="display: none;" />
   </div>
