@@ -1,38 +1,91 @@
-const passwordInput = document.getElementById('passwordInput');
-const submitBtn = document.getElementById('submitPassword');
-const errorMessage = document.getElementById('errorMessage');
-const passwordScreen = document.getElementById('passwordScreen');
-const videoContainer = document.getElementById('videoContainer');
-const girlVideo = document.getElementById('girlVideo');
-const dreamyVideo = document.getElementById('dreamyVideo');
-const bgMusic = document.getElementById('bgMusic');
-const openGiftButton = document.getElementById('openGiftButton');
-const giftImage = document.getElementById('giftImage');
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f5faff, #e5e4ff);
+  overflow: hidden;
+  text-align: center;
+}
 
-submitBtn.addEventListener('click', () => {
-  const input = passwordInput.value.trim();
+.cloud-container {
+  margin-top: 20vh;
+  animation: fadeIn 2s ease-in-out;
+}
 
-  if (input !== 'Milk10/6') {
-    errorMessage.innerText = '🥺 Mật khẩu sai rồi nè!';
-    return;
+input[type="password"] {
+  padding: 10px;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  background: linear-gradient(to right, #c6f1ff, #f5d1ff);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #333;
+  box-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
+  animation: glowButton 2s ease-in-out infinite alternate;
+  transition: transform 0.3s ease;
+  margin-top: 1rem;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#videoContainer video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#openGiftButton {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+#giftImage {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  z-index: 11;
+}
+
+.error {
+  color: #d6336c;
+  margin-top: 0.5rem;
+}
+
+.countdown {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 1rem 0;
+}
+
+@keyframes glowButton {
+  from {
+    box-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
   }
+  to {
+    box-shadow: 0 0 20px rgba(200, 200, 255, 0.8);
+  }
+}
 
-  // Mật khẩu đúng → vào trang chính
-  passwordScreen.style.display = 'none';
-  videoContainer.style.display = 'block';
-  girlVideo.play();
-  bgMusic.play();
-
-  setTimeout(() => {
-    girlVideo.style.display = 'none';
-    dreamyVideo.style.display = 'block';
-  }, 7000); // Sau 7s thì chuyển sang nền dreamy loop
-
-  setTimeout(() => {
-    openGiftButton.style.display = 'block';
-  }, 12000); // Sau 12s thì hiện nút mở quà
-});
-
-openGiftButton.addEventListener('click', () => {
-  giftImage.style.display = giftImage.style.display === 'block' ? 'none' : 'block';
-});
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
