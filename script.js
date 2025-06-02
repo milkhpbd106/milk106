@@ -1,44 +1,71 @@
-const passwordInput = document.getElementById('passwordInput');
-const submitBtn = document.getElementById('submitPassword');
-const errorMessage = document.getElementById('errorMessage');
-const passwordScreen = document.getElementById('passwordScreen');
-const videoContainer = document.getElementById('videoContainer');
-const girlVideo = document.getElementById('girlVideo');
-const dreamyVideo = document.getElementById('dreamyVideo');
-const bgMusic = document.getElementById('bgMusic');
-const openGiftButton = document.getElementById('openGiftButton');
-const giftImage = document.getElementById('giftImage');
+// script.js
 
-// Bỏ phần đếm ngược vì con muốn xem ngay
-document.getElementById('timeLeft').style.display = 'none';
+// Nhạc nền
+const audio = new Audio("you-vietra.mp3");
+audio.loop = true;
 
-submitBtn.addEventListener('click', () => {
-  const input = passwordInput.value.trim();
+// Mở popup quà
+const openGiftBtn = document.getElementById("openGiftBtn");
+const giftPopup = document.getElementById("giftPopup");
+const closePopup = document.getElementById("closePopup");
 
-  if (input !== 'Milk10/6') {
-    errorMessage.innerText = '🥺 Mật khẩu sai rồi nè!';
-    return;
-  }
-
-  // Nếu đúng mật khẩu thì vào web luôn
-  passwordScreen.style.display = 'none';
-  videoContainer.style.display = 'block';
-  girlVideo.play();
-  bgMusic.play();
-
-  setTimeout(() => {
-    girlVideo.pause();
-    girlVideo.currentTime = 0;
-    girlVideo.style.display = 'none';
-    dreamyVideo.style.display = 'block';
-    dreamyVideo.play();
-  }, 7000);
-
-  setTimeout(() => {
-    openGiftButton.style.display = 'block';
-  }, 12000);
+openGiftBtn.addEventListener("click", () => {
+  giftPopup.style.display = "flex";
 });
 
-openGiftButton.addEventListener('click', () => {
-  giftImage.style.display = giftImage.style.display === 'block' ? 'none' : 'block';
+closePopup.addEventListener("click", () => {
+  giftPopup.style.display = "none";
+});
+
+// Click anywhere -> hiệu ứng sáng nhỏ xinh
+const sparkleContainer = document.createElement("div");
+sparkleContainer.className = "sparkle-container";
+document.body.appendChild(sparkleContainer);
+
+document.addEventListener("click", (e) => {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = `${e.clientX}px`;
+  sparkle.style.top = `${e.clientY}px`;
+  sparkleContainer.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 1000);
+});
+
+// Tự động phát nhạc và video khi vào được trang chính
+window.addEventListener("load", () => {
+  const mainContent = document.querySelector(".main-content");
+  if (mainContent) {
+    audio.play();
+    const video1 = document.getElementById("video1");
+    const video2 = document.getElementById("video2");
+    video1.play();
+
+    // Hiện lời chúc đầu
+    const wishes = document.querySelectorAll(".wishes p");
+    wishes.forEach((p, i) => {
+      setTimeout(() => {
+        p.style.opacity = 1;
+      }, i * 6000);
+      setTimeout(() => {
+        p.style.opacity = 0;
+      }, i * 6000 + 6000);
+    });
+
+    // Chuyển sang video 2 sau 8s
+    setTimeout(() => {
+      video1.style.display = "none";
+      video2.style.display = "block";
+      video2.play();
+      document.querySelector(".wishes2").style.display = "flex";
+      const wishes2 = document.querySelectorAll(".wishes2 p");
+      wishes2.forEach((p, i) => {
+        setTimeout(() => {
+          p.style.opacity = 1;
+        }, i * 4000);
+        setTimeout(() => {
+          p.style.opacity = 0;
+        }, i * 4000 + 4000);
+      });
+    }, 8000);
+  }
 });
