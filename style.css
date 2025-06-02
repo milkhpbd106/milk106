@@ -1,182 +1,171 @@
-/* === STYLE.CSS === */
-
 /* Reset và font */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
-  background: url('cloud.nen.jpg') no-repeat center center fixed;
-  background-size: cover;
+  height: 100%;
   overflow: hidden;
-  color: #fff;
+  background: #dff3fc;
 }
 
-/* Hiệu ứng mây bay */
-.moving-clouds {
-  position: absolute;
+/* Màn hình nhập mật khẩu */
+#passwordScreen {
+  background: url('cloud.nen.jpg') center center / cover no-repeat;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('images.png') repeat-x;
-  animation: cloudmove 60s linear infinite;
-  z-index: 1;
-  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cloudsFloat 30s linear infinite;
 }
 
-@keyframes cloudmove {
-  0% { background-position: 0 0; }
-  100% { background-position: 10000px 0; }
-}
-
-/* Form nhập mật khẩu */
-.password-screen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.4);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+.password-container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px 40px;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
   text-align: center;
-  z-index: 2;
 }
 
-.password-screen input[type="password"] {
+.password-container input {
   padding: 10px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  width: 200px;
+  border-radius: 15px;
+  margin-top: 10px;
+  width: 100%;
+  outline: none;
 }
 
-.password-screen button {
-  background: linear-gradient(135deg, #e0f7fa, #ffffff);
-  color: #3e4a5e;
+.password-container button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: linear-gradient(to right, #c1e3ff, #e0d6ff);
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 12px;
+  border-radius: 20px;
+  color: #333;
+  font-size: 1.1rem;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(200, 200, 255, 0.5);
   transition: all 0.3s ease;
 }
 
-.password-screen button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+.password-container button:hover {
+  background: linear-gradient(to right, #b9dfff, #d8ccff);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
-.message {
-  margin-top: 15px;
-  font-size: 16px;
-  color: #fff;
-  background-color: rgba(0,0,0,0.3);
-  padding: 10px;
-  border-radius: 10px;
+.fa-lock {
+  font-size: 2rem;
+  color: #aab8ff;
+  margin-bottom: 10px;
+  display: block;
 }
 
-/* Web chính sau khi mở khóa */
-.main-container {
-  display: none;
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 3;
-}
-
-video.bg-video {
+/* Video */
+video {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  top: 0;
-  left: 0;
+  display: none;
   z-index: -1;
 }
 
-.chuc-text {
+/* Lời chúc */
+.message {
   position: absolute;
-  top: 15%;
+  top: 20%;
   width: 100%;
   text-align: center;
-  font-size: 22px;
-  color: #ffffff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #cceeff;
-  opacity: 0;
-  animation: fadeInOut 9s forwards;
-  z-index: 4;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; }
+  color: white;
+  font-size: 1.5rem;
+  opacity: 1;
+  transition: opacity 3s ease;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Nút mở quà */
-#gift-button {
+#openGiftButton {
   position: absolute;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #dcedc8, #ffffff);
-  color: #5d6470;
+  padding: 15px 30px;
+  font-size: 1.3rem;
+  background: linear-gradient(to right, #c8f0ff, #f6e2ff);
+  color: #444;
   border: none;
-  border-radius: 14px;
-  padding: 12px 24px;
-  font-size: 18px;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-  transition: 0.3s;
-  z-index: 4;
   display: none;
+  animation: pulse 2s infinite;
 }
 
-#gift-button:hover {
-  transform: scale(1.08) translateX(-50%);
-  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+#openGiftButton:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
 }
 
-/* Popup ảnh quà */
-.gift-popup {
-  position: fixed;
+/* Hình ảnh món quà */
+#giftImage {
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: rgba(255,255,255,0.9);
-  border-radius: 20px;
-  padding: 10px;
-  z-index: 5;
-  transition: transform 0.3s ease;
+  max-width: 90%;
+  max-height: 80%;
+  transform: translate(-50%, -50%);
+  display: none;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+  animation: fadeIn 1s ease;
 }
 
-.gift-popup img {
-  max-width: 300px;
-  margin: 10px;
-  border-radius: 12px;
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.gift-popup.active {
-  transform: translate(-50%, -50%) scale(1);
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
 }
 
-/* Hiệu ứng click */
-body:active::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-  animation: sparkle 0.8s ease forwards;
-  z-index: 9999;
+@keyframes cloudsFloat {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
 }
 
-@keyframes sparkle {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(5); opacity: 0; }
+/* Hiệu ứng click sáng nhẹ toàn trang */
+body:active {
+  animation: clickFlash 0.4s;
+}
+
+@keyframes clickFlash {
+  0% { background-color: rgba(255, 255, 255, 0.1); }
+  100% { background-color: transparent; }
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .message {
+    font-size: 1.2rem;
+  }
+
+  .password-container {
+    width: 80%;
+    padding: 20px;
+  }
+
+  #openGiftButton {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 }
