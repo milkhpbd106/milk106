@@ -1,91 +1,182 @@
-body {
+/* === STYLE.CSS === */
+
+/* Reset và font */
+body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #f5faff, #e5e4ff);
+  font-family: 'Quicksand', sans-serif;
+  background: url('cloud.nen.jpg') no-repeat center center fixed;
+  background-size: cover;
   overflow: hidden;
-  text-align: center;
+  color: #fff;
 }
 
-.cloud-container {
-  margin-top: 20vh;
-  animation: fadeIn 2s ease-in-out;
-}
-
-input[type="password"] {
-  padding: 10px;
-  border-radius: 1rem;
-  border: 1px solid #ccc;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-}
-
-button {
-  padding: 10px 20px;
-  background: linear-gradient(to right, #c6f1ff, #f5d1ff);
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-  color: #333;
-  box-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
-  animation: glowButton 2s ease-in-out infinite alternate;
-  transition: transform 0.3s ease;
-  margin-top: 1rem;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-#videoContainer video {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
+/* Hiệu ứng mây bay */
+.moving-clouds {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('images.png') repeat-x;
+  animation: cloudmove 60s linear infinite;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+@keyframes cloudmove {
+  0% { background-position: 0 0; }
+  100% { background-position: 10000px 0; }
+}
+
+/* Form nhập mật khẩu */
+.password-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.4);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 2;
+}
+
+.password-screen input[type="password"] {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.password-screen button {
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  color: #3e4a5e;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.password-screen button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Web chính sau khi mở khóa */
+.main-container {
+  display: none;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 3;
+}
+
+video.bg-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   top: 0;
   left: 0;
   z-index: -1;
 }
 
-#openGiftButton {
+.chuc-text {
   position: absolute;
-  bottom: 5%;
+  top: 15%;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #cceeff;
+  opacity: 0;
+  animation: fadeInOut 9s forwards;
+  z-index: 4;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Nút mở quà */
+#gift-button {
+  position: absolute;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  background: linear-gradient(135deg, #dcedc8, #ffffff);
+  color: #5d6470;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+  z-index: 4;
+  display: none;
 }
 
-#giftImage {
-  position: absolute;
-  bottom: 20%;
+#gift-button:hover {
+  transform: scale(1.08) translateX(-50%);
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+/* Popup ảnh quà */
+.gift-popup {
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  z-index: 11;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 10px;
+  z-index: 5;
+  transition: transform 0.3s ease;
 }
 
-.error {
-  color: #d6336c;
-  margin-top: 0.5rem;
+.gift-popup img {
+  max-width: 300px;
+  margin: 10px;
+  border-radius: 12px;
 }
 
-.countdown {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 1rem 0;
+.gift-popup.active {
+  transform: translate(-50%, -50%) scale(1);
 }
 
-@keyframes glowButton {
-  from {
-    box-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
-  }
-  to {
-    box-shadow: 0 0 20px rgba(200, 200, 255, 0.8);
-  }
+/* Hiệu ứng click */
+body:active::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  animation: sparkle 0.8s ease forwards;
+  z-index: 9999;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes sparkle {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(5); opacity: 0; }
 }
