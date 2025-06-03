@@ -6,10 +6,65 @@
   <title>Milk's Dreamy Birthday</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .clouds {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .floating-cloud {
+      position: absolute;
+      width: 100px;
+      opacity: 0.8;
+      animation: floatCloud 40s linear infinite;
+    }
+
+    .floating-cloud.cloud1 {
+      top: 10%;
+      left: -150px;
+      animation-delay: 0s;
+    }
+    .floating-cloud.cloud2 {
+      top: 30%;
+      left: -180px;
+      animation-delay: 5s;
+    }
+    .floating-cloud.cloud3 {
+      top: 50%;
+      left: -200px;
+      animation-delay: 10s;
+    }
+    .floating-cloud.cloud4 {
+      top: 70%;
+      left: -220px;
+      animation-delay: 15s;
+    }
+    .floating-cloud.cloud5 {
+      top: 20%;
+      left: -240px;
+      animation-delay: 20s;
+    }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(-150px); }
+      100% { transform: translateX(110vw); }
+    }
+  </style>
 </head>
 <body>
   <!-- Màn hình nhập mật khẩu -->
   <div id="passwordScreen">
+    <div class="clouds">
+      <img src="images.png" class="floating-cloud cloud1" alt="cloud" />
+      <img src="images.png" class="floating-cloud cloud2" alt="cloud" />
+      <img src="images.png" class="floating-cloud cloud3" alt="cloud" />
+      <img src="images.png" class="floating-cloud cloud4" alt="cloud" />
+      <img src="images.png" class="floating-cloud cloud5" alt="cloud" />
+    </div>
     <div class="password-container">
       <i class="fa-solid fa-lock"></i>
       <input type="password" id="passwordInput" placeholder="Nhập mật khẩu...">
