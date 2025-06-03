@@ -62,15 +62,9 @@
 
     document.getElementById("submitPassword").addEventListener("click", () => {
       const enteredPassword = document.getElementById("passwordInput").value;
-      const today = new Date();
-      const unlockDate = new Date(today.getFullYear(), 5, 10); // tháng 6 là 5
 
       if (enteredPassword === correctPassword) {
-        if (today < unlockDate) {
-          alert("📅 Món quà có thể mở vào ngày 10/6 nha 💖");
-        } else {
-          startBirthdaySequence();
-        }
+        startBirthdaySequence();
       } else {
         alert("❌ Sai mật khẩu rồi nè 😢");
       }
