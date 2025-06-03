@@ -23,35 +23,31 @@
       animation: floatCloud 40s linear infinite;
     }
 
-    .floating-cloud.cloud1 {
-      top: 10%;
-      left: -150px;
-      animation-delay: 0s;
-    }
-    .floating-cloud.cloud2 {
-      top: 30%;
-      left: -180px;
-      animation-delay: 5s;
-    }
-    .floating-cloud.cloud3 {
-      top: 50%;
-      left: -200px;
-      animation-delay: 10s;
-    }
-    .floating-cloud.cloud4 {
-      top: 70%;
-      left: -220px;
-      animation-delay: 15s;
-    }
-    .floating-cloud.cloud5 {
-      top: 20%;
-      left: -240px;
-      animation-delay: 20s;
-    }
+    .floating-cloud.cloud1 { top: 10%; left: -150px; animation-delay: 0s; }
+    .floating-cloud.cloud2 { top: 25%; left: -180px; animation-delay: 5s; }
+    .floating-cloud.cloud3 { top: 40%; left: -120px; animation-delay: 10s; }
+    .floating-cloud.cloud4 { top: 55%; left: -160px; animation-delay: 15s; }
+    .floating-cloud.cloud5 { top: 70%; left: -100px; animation-delay: 20s; }
 
     @keyframes floatCloud {
       0% { transform: translateX(-150px); }
       100% { transform: translateX(110vw); }
+    }
+
+    #submitPassword {
+      background: linear-gradient(90deg, #cceeff, #ffffff, #e0ccff);
+      color: #336677;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(200, 200, 255, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #submitPassword:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
   </style>
 </head>
@@ -72,8 +68,8 @@
     </div>
   </div>
 
-  <video id="firstVideo" src="milkdream.mp4" muted></video>
-  <video id="secondVideo" src="dreamy-video.mp4" loop muted></video>
+  <video id="firstVideo" src="milkdream.mp4" muted style="display: none;"></video>
+  <video id="secondVideo" src="dreamy-video.mp4" loop muted style="display: none;"></video>
 
   <audio id="bgm" src="you-vietra.mp3" loop></audio>
 
@@ -91,12 +87,13 @@
   </div>
 
   <!-- Nút mở quà và ảnh quà -->
-  <button id="openGiftButton">🎁 Mở món quà dành riêng cho cậu</button>
-  <div id="giftGallery">
+  <button id="openGiftButton" style="display: none;">🎁 Mở món quà dành riêng cho cậu</button>
+  <div id="giftGallery" style="display: none;">
     <img class="gift-image" src="gift-image.png" alt="Gift 1" />
     <img class="gift-image" src="gift2.png" alt="Gift 2" />
     <img class="gift-image" src="gift3.png" alt="Gift 3" />
     <img class="gift-image" src="gift4.png" alt="Gift 4" />
+    <img class="gift-image" src="gift5.png" alt="Gift 5" />
   </div>
 
   <!-- Hiệu ứng đặc biệt -->
@@ -105,7 +102,7 @@
   <div class="bubbles"></div>
 
   <!-- Lá thư nhỏ xíu -->
-  <div id="tinyLetter">
+  <div id="tinyLetter" style="display: none;">
     <button id="openLetter">📩 Lá thư nhỏ xíu</button>
     <div id="letterContent">
       <textarea placeholder="Viết điều gì đó gửi tới người ấy ở đây..."></textarea>
@@ -133,11 +130,16 @@
       const secondVideo = document.getElementById("secondVideo");
       const msg1 = document.getElementById("message1");
       const msg2 = document.getElementById("message2");
+      const giftButton = document.getElementById("openGiftButton");
+      const giftGallery = document.getElementById("giftGallery");
+      const tinyLetter = document.getElementById("tinyLetter");
 
       bgm.play();
       firstVideo.style.display = "block";
+      firstVideo.loop = true;
       firstVideo.play();
       msg1.style.display = "block";
+      msg1.style.opacity = 1;
 
       setTimeout(() => {
         msg1.style.opacity = 0;
@@ -148,6 +150,12 @@
 
         msg2.style.display = "block";
         msg2.style.opacity = 1;
+
+        setTimeout(() => {
+          giftButton.style.display = "block";
+          giftGallery.style.display = "block";
+          tinyLetter.style.display = "block";
+        }, 4000);
       }, 11000);
     }
   </script>
