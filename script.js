@@ -1,3 +1,53 @@
+<div id="passwordScreen" class="password-container">
+  <h2>Nhập mật khẩu để mở quà 🎁</h2>
+  <input type="password" id="passwordInput" placeholder="Mật khẩu..." />
+  <button id="submitPassword">Mở khóa</button>
+</div>
+
+<!-- Hiệu ứng mây bồng bềnh -->
+<div class="clouds">
+  <img src="cloud.png" class="floating-cloud cloud1" />
+  <img src="cloud.png" class="floating-cloud cloud2" />
+  <img src="cloud.png" class="floating-cloud cloud3" />
+  <img src="cloud.png" class="floating-cloud cloud4" />
+  <img src="cloud.png" class="floating-cloud cloud5" />
+</div>
+
+<!-- Nhạc nền -->
+<audio id="bgm" src="You-Vietra.mp3" loop></audio>
+
+<!-- Video đầu tiên: cô gái nhìn mây -->
+<video id="firstVideo" style="display:none; width:100%; height:auto;" src="milkdream.mp4"></video>
+
+<!-- Video nền mây dreamy lặp lại -->
+<video id="secondVideo" style="display:none; width:100%; height:auto;" src="dreamy-video.mp4" loop muted></video>
+
+<!-- Lời chúc đầu -->
+<div id="message1" class="message" style="display:none;">
+  <p>Chúc mừng sinh nhật cậu 💖</p>
+  <p>Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ ✨</p>
+  <p>Hãy nhấn vào đây để mở món quà nhỏ xíu tớ dành riêng cho cậu 🎁</p>
+</div>
+
+<!-- Lời chúc sau cùng -->
+<div id="message2" class="message" style="display:none;">
+  🌸 Happy Birthday Milk 💖<br />
+  Let’s step into a dreamy world together ☁️
+</div>
+
+<!-- Nút mở quà -->
+<button id="openGiftButton" style="display:none;">Mở quà dành riêng cho cậu 🎀</button>
+
+<!-- Hộp quà hình ảnh -->
+<div id="giftGallery">
+  <img src="gift-image.png" alt="Gift" class="gift-image" />
+</div>
+
+<!-- Tiny letter (hiển thị cuối cùng cùng quà) -->
+<div id="tinyLetter" class="message" style="display:none;">
+  Một bức thư nhỏ xíu dành riêng cho cậu 💌
+</div>
+
 // script.js
 const correctPassword = "Milk10/6";
 // Để test: bỏ khóa ngày
