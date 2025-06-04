@@ -13,9 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedbackSection = document.getElementById("feedback-section");
   const milkBtn = document.getElementById("milk-btn");
   const fuyuhiBtn = document.getElementById("fuyuhi-btn");
+  const unlockText = document.getElementById("unlock-text");
 
   let count = 10;
   countdownEl.innerText = count;
+  passwordInput.disabled = true;
+  unlockText.style.opacity = 0;
+
   const timer = setInterval(() => {
     count--;
     countdownEl.innerText = count;
@@ -23,17 +27,22 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(timer);
       countdownEl.style.display = "none";
       passwordInput.disabled = false;
+      unlockText.style.opacity = 1;
+      unlockText.classList.add("glow-text");
     }
   }, 1000);
 
   submitBtn.addEventListener("click", () => {
     const pwd = passwordInput.value.trim();
     if (pwd.toLowerCase() === "milk") {
-      document.getElementById("password-screen").style.display = "none";
-      mainContent.classList.remove("hidden");
-      music.play();
-      video1.play();
-      showWishes();
+      messageEl.innerHTML = "<span class='correct'>Hôm nay là ngày gì nào ✨</span>";
+      setTimeout(() => {
+        document.getElementById("password-screen").style.display = "none";
+        mainContent.classList.remove("hidden");
+        music.play();
+        video1.play();
+        showWishes();
+      }, 10000);
     } else {
       messageEl.innerHTML = "Sai mật khẩu rồi cậu ơi 😢";
     }
