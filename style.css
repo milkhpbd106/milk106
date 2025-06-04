@@ -169,3 +169,142 @@ body:active {
     padding: 10px 20px;
   }
 }
+body {
+  background: linear-gradient(to bottom, #f0f9ff, #e8ddff);
+  font-family: 'Comic Neue', cursive, sans-serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container chính phần nhập mật khẩu */
+.password-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 40px 30px;
+  border-radius: 24px;
+  box-shadow: 0 0 24px rgba(255, 200, 255, 0.5);
+  text-align: center;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.password-container input[type="password"] {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 220px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(200, 200, 255, 0.3);
+}
+
+.password-container i {
+  font-size: 28px;
+  color: #ccbbff;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Mây mơ mộng */
+.clouds img {
+  opacity: 0.7;
+  animation-timing-function: ease-in-out;
+  filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.5));
+}
+
+/* Bụi phép */
+.sparkle-container::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: sparkleAnim 4s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes sparkleAnim {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Cầu vồng */
+.rainbow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 140px;
+  border-radius: 0 0 140px 140px;
+  background: conic-gradient(
+    from 180deg,
+    #ff9aa2 0deg 60deg,
+    #ffb7b2 60deg 120deg,
+    #fcd5ce 120deg 180deg,
+    #cceeff 180deg 240deg,
+    #d0f4de 240deg 300deg,
+    #e0ccff 300deg 360deg
+  );
+  opacity: 0.7;
+  box-shadow: 0 0 20px rgba(255, 200, 255, 0.3);
+  z-index: 2;
+}
+
+/* Bóng mờ mỗi giây */
+@keyframes pulseLight {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.9); }
+}
+
+.password-container {
+  animation: pulseLight 2s infinite;
+}
+
+/* Mây thêm gần bộ đếm hoặc input */
+.password-container::before, .password-container::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 50px;
+  background: url('images.png') no-repeat center;
+  background-size: contain;
+  opacity: 0.5;
+}
+
+.password-container::before {
+  top: -40px;
+  left: -60px;
+  animation: floatCloud 60s linear infinite;
+}
+
+.password-container::after {
+  bottom: -30px;
+  right: -50px;
+  animation: floatCloud 45s linear infinite reverse;
+}
+
+/* Bong bóng mơ mộng */
+.bubbles::after {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 5px, transparent 6px);
+  background-size: 60px 60px;
+  animation: moveBubbles 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes moveBubbles {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
