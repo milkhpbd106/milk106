@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    body {
+      margin: 0;
+      background-color: #f9faff;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
     .clouds {
       position: absolute;
       top: 0;
@@ -34,6 +41,20 @@
       100% { transform: translateX(110vw); }
     }
 
+    .password-container {
+      text-align: center;
+      margin-top: 25vh;
+      z-index: 10;
+      position: relative;
+    }
+
+    .password-container input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
     #submitPassword {
       background: linear-gradient(90deg, #cceeff, #ffffff, #e0ccff);
       color: #336677;
@@ -49,115 +70,165 @@
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
+
+    #openGiftButton {
+      display: block;
+      margin: 30px auto 10px auto;
+      background: linear-gradient(to right, #e0ccff, #cceeff);
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(200, 200, 255, 0.6);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #openGiftButton:hover {
+      transform: scale(1.05);
+    }
+
+    #giftGallery {
+      display: none;
+      position: relative;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #giftGallery.show {
+      display: block;
+    }
+
+    .gift-image {
+      max-width: 200px;
+      margin: 10px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(200, 200, 255, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .gift-image:hover {
+      transform: scale(1.05);
+    }
+
+    .message {
+      text-align: center;
+      font-size: 20px;
+      color: #6655aa;
+      font-weight: 500;
+      position: absolute;
+      top: 20vh;
+      width: 100%;
+      animation: fadeInOut 8s ease-in-out forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(20px); }
+      30% { opacity: 1; transform: translateY(0); }
+      70% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    #message2 {
+      animation: fadeInOut 6s ease-in-out forwards;
+    }
+
+    .sparkle-container, .rainbow, .bubbles {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .rainbow {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #c2e9fb);
+      opacity: 0.4;
+      top: 15vh;
+      animation: rainbowFade 6s infinite ease-in-out;
+    }
+
+    @keyframes rainbowFade {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
   </style>
 </head>
 <body>
-  <!-- Màn hình nhập mật khẩu -->
-  <div id="passwordScreen">
-    <div class="clouds">
-      <img src="images.png" class="floating-cloud cloud1" alt="cloud" />
-      <img src="images.png" class="floating-cloud cloud2" alt="cloud" />
-      <img src="images.png" class="floating-cloud cloud3" alt="cloud" />
-      <img src="images.png" class="floating-cloud cloud4" alt="cloud" />
-      <img src="images.png" class="floating-cloud cloud5" alt="cloud" />
-    </div>
-    <div class="password-container">
-      <i class="fa-solid fa-lock"></i>
-      <input type="password" id="passwordInput" placeholder="Nhập mật khẩu...">
-      <button id="submitPassword">Mở quà</button>
-    </div>
-  </div>
+<!-- phần HTML giữ nguyên như trước đó -->
+<script>
+  const correctPassword = "Milk10/6";
 
-  <video id="firstVideo" src="milkdream.mp4" muted style="display: none;"></video>
-  <video id="secondVideo" src="dreamy-video.mp4" loop muted style="display: none;"></video>
+  document.getElementById("submitPassword").addEventListener("click", () => {
+    const enteredPassword = document.getElementById("passwordInput").value;
 
-  <audio id="bgm" src="you-vietra.mp3" loop></audio>
+    if (enteredPassword === correctPassword) {
+      startBirthdaySequence();
+    } else {
+      alert("❌ Sai mật khẩu rồi nè 😢");
+    }
+  });
 
-  <!-- 3 lời chúc đầu -->
-  <div id="message1" class="message fade-in-out-1" style="display:none">
-    <p>🎂 Chúc mừng sinh nhật cậu 🎉</p>
-    <p>✨ Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ 🌸</p>
-    <p>🎁 Hãy nhấn vào đây để mở món quà nhỏ xíu tớ dành riêng cho cậu 💖</p>
-  </div>
+  function startBirthdaySequence() {
+    document.getElementById("passwordScreen").style.display = "none";
 
-  <!-- 2 lời chúc sau -->
-  <div id="message2" class="message fade-in-out-2" style="display:none">
-    <p>🌸 Happy Birthday Milk 💖</p>
-    <p>Let’s step into a dreamy world together ✨</p>
-  </div>
+    const bgm = document.getElementById("bgm");
+    const firstVideo = document.getElementById("firstVideo");
+    const secondVideo = document.getElementById("secondVideo");
+    const msg1 = document.getElementById("message1");
+    const msg2 = document.getElementById("message2");
+    const giftButton = document.getElementById("openGiftButton");
+    const giftGallery = document.getElementById("giftGallery");
+    const tinyLetter = document.getElementById("tinyLetter");
 
-  <!-- Nút mở quà và ảnh quà -->
-  <button id="openGiftButton" style="display: none;">🎁 Mở món quà dành riêng cho cậu</button>
-  <div id="giftGallery" style="display: none;">
-    <img class="gift-image" src="gift-image.png" alt="Gift 1" />
-    <img class="gift-image" src="gift2.png" alt="Gift 2" />
-    <img class="gift-image" src="gift3.png" alt="Gift 3" />
-    <img class="gift-image" src="gift4.png" alt="Gift 4" />
-    <img class="gift-image" src="gift5.png" alt="Gift 5" />
-  </div>
+    bgm.play();
+    firstVideo.style.display = "block";
+    firstVideo.loop = false;
+    firstVideo.currentTime = 0;
+    firstVideo.play();
 
-  <!-- Hiệu ứng đặc biệt -->
-  <div class="sparkle-container"></div>
-  <div class="rainbow"></div>
-  <div class="bubbles"></div>
-
-  <!-- Lá thư nhỏ xíu -->
-  <div id="tinyLetter" style="display: none;">
-    <button id="openLetter">📩 Lá thư nhỏ xíu</button>
-    <div id="letterContent">
-      <textarea placeholder="Viết điều gì đó gửi tới người ấy ở đây..."></textarea>
-    </div>
-  </div>
-
-  <script>
-    const correctPassword = "Milk10/6";
-
-    document.getElementById("submitPassword").addEventListener("click", () => {
-      const enteredPassword = document.getElementById("passwordInput").value;
-
-      if (enteredPassword === correctPassword) {
-        startBirthdaySequence();
-      } else {
-        alert("❌ Sai mật khẩu rồi nè 😢");
-      }
+    msg1.style.display = "block";
+    msg1.style.opacity = 0;
+    msg1.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: 5000,
+      fill: "forwards"
     });
 
-    function startBirthdaySequence() {
-      document.getElementById("passwordScreen").style.display = "none";
+    setTimeout(() => {
+      msg1.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 3000,
+        fill: "forwards"
+      });
+    }, 7000);
 
-      const bgm = document.getElementById("bgm");
-      const firstVideo = document.getElementById("firstVideo");
-      const secondVideo = document.getElementById("secondVideo");
-      const msg1 = document.getElementById("message1");
-      const msg2 = document.getElementById("message2");
-      const giftButton = document.getElementById("openGiftButton");
-      const giftGallery = document.getElementById("giftGallery");
-      const tinyLetter = document.getElementById("tinyLetter");
+    setTimeout(() => {
+      firstVideo.pause();
+      firstVideo.style.display = "none";
 
-      bgm.play();
-      firstVideo.style.display = "block";
-      firstVideo.loop = true;
-      firstVideo.play();
-      msg1.style.display = "block";
-      msg1.style.opacity = 1;
+      secondVideo.style.display = "block";
+      secondVideo.play();
+
+      msg1.style.display = "none";
+      msg2.style.display = "block";
+      msg2.style.opacity = 0;
+
+      msg2.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 1000,
+        fill: "forwards"
+      });
 
       setTimeout(() => {
-        msg1.style.opacity = 0;
-        firstVideo.style.display = "none";
+        giftButton.style.display = "block";
+        giftGallery.style.display = "block";
+        tinyLetter.style.display = "block";
+      }, 4000);
+    }, 10000);
+  }
 
-        secondVideo.style.display = "block";
-        secondVideo.play();
-
-        msg2.style.display = "block";
-        msg2.style.opacity = 1;
-
-        setTimeout(() => {
-          giftButton.style.display = "block";
-          giftGallery.style.display = "block";
-          tinyLetter.style.display = "block";
-        }, 4000);
-      }, 11000);
-    }
-  </script>
+  document.getElementById("openGiftButton").addEventListener("click", () => {
+    const giftGallery = document.getElementById("giftGallery");
+    giftGallery.classList.toggle("show");
+  });
+</script>
 </body>
 </html>
