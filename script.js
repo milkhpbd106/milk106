@@ -1,48 +1,102 @@
-const password = "Milk10/6";
-const unlockDate = new Date("2025-06-10");
-
-function checkPassword() {
-  const input = document.getElementById("passwordInput").value;
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordSection = document.getElementById("password-section");
+  const passwordInput = document.getElementById("password-input");
+  const enterButton = document.getElementById("enter-button");
   const message = document.getElementById("message");
-  if (input === password) {
-    const today = new Date();
-    if (today.toDateString() !== unlockDate.toDateString()) {
-      message.textContent = "Món quà có thể mở vào ngày 10/6 ✨";
-    } else {
-      startExperience();
+  const countdownText = document.getElementById("countdown");
+  const cloudContainer = document.getElementById("cloud-container");
+
+  const giftButton = document.getElementById("gift-button");
+  const giftImages = document.getElementById("gift-images");
+  const responseBox = document.getElementById("response-box");
+  const showResponseBtn = document.getElementById("show-response");
+  const closeResponseBtn = document.getElementById("close-response");
+
+  const correctPassword = "Milk10/6";
+
+  // Hiệu ứng đếm ngược trước khi cho nhập mật khẩu
+  let count = 10;
+  passwordInput.style.display = "none";
+  enterButton.style.display = "none";
+  const countdownInterval = setInterval(() => {
+    countdownText.textContent = `⏳ ${count}s để mở món quà...`;
+    count--;
+    if (count < 0) {
+      clearInterval(countdownInterval);
+      countdownText.style.display = "none";
+      passwordInput.style.display = "block";
+      enterButton.style.display = "block";
     }
-  } else {
-    message.textContent = "Sai mật khẩu rồi, thử lại nhé 💭";
+  }, 1000);
+
+  // Mây bay tự nhiên
+  for (let i = 0; i < 6; i++) {
+    const cloud = document.createElement("img");
+    cloud.src = "images.png";
+    cloud.classList.add("floating-cloud");
+    cloud.style.left = `${Math.random() * 100}%`;
+    cloud.style.top = `${Math.random() * 100}%`;
+    cloud.style.animationDuration = `${10 + Math.random() * 10}s`;
+    cloudContainer.appendChild(cloud);
   }
-}
 
-function startExperience() {
-  document.getElementById("passwordScreen").classList.add("hidden");
-  const main = document.getElementById("mainContent");
-  main.classList.remove("hidden");
+  enterButton.addEventListener("click", () => {
+    const entered = passwordInput.value;
+    if (entered !== correctPassword) {
+      message.innerHTML = "❌ Sai mật khẩu!";
+      return;
+    }
 
-  const music = document.getElementById("bgMusic");
-  music.play();
+    message.innerHTML = "🎉 Hôm nay là ngày gì nào~";
+    setTimeout(() => {
+      document.getElementById("password-page").style.display = "none";
+      document.getElementById("main-page").style.display = "block";
+      initMainPage();
+    }, 10000);
+  });
 
-  const introVideo = document.getElementById("introVideo");
-  const msg1 = document.getElementById("message1");
-  msg1.classList.remove("hidden");
+  function initMainPage() {
+    const video1 = document.getElementById("video1");
+    const video2 = document.getElementById("video2");
+    const audio = document.getElementById("birthday-audio");
+    const wishes = document.querySelectorAll(".wish");
 
-  setTimeout(() => {
-    introVideo.classList.add("hidden");
-    document.getElementById("loopVideo").classList.remove("hidden");
-    msg1.classList.add("hidden");
+    audio.play();
+    video1.style.display = "block";
+    video1.play();
 
-    const msg2 = document.getElementById("message2");
-    msg2.classList.remove("hidden");
+    wishes.forEach((el, index) => {
+      setTimeout(() => {
+        el.style.opacity = 1;
+      }, index * 2300);
+    });
 
     setTimeout(() => {
-      msg2.classList.add("hidden");
-      document.getElementById("openGiftButton").classList.remove("hidden");
-    }, 6000); // message2 hiện 3s, fade 3s
-  }, 10000); // sau 10s đổi video
-}
+      wishes.forEach(el => el.style.opacity = 0);
+      video1.style.display = "none";
+      video2.style.display = "block";
+      video2.play();
 
-document.getElementById("openGiftButton").onclick = () => {
-  document.getElementById("giftContainer").classList.toggle("hidden");
-};
+      // Hiện lời chúc thứ hai
+      const secondWishes = document.querySelectorAll(".second-wish");
+      secondWishes.forEach((el, index) => {
+        setTimeout(() => {
+          el.style.opacity = 1;
+        }, index * 3000);
+      });
+    }, 10000);
+  }
+
+  giftButton.addEventListener("click", () => {
+    giftImages.classList.toggle("show");
+    giftButton.classList.toggle("active");
+  });
+
+  showResponseBtn.addEventListener("click", () => {
+    responseBox.style.display = "block";
+  });
+
+  closeResponseBtn.addEventListener("click", () => {
+    responseBox.style.display = "none";
+  });
+});
