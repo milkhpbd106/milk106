@@ -5,280 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Milk's Dreamy Birthday</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      background-color: #f9faff;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
-    }
-
-    .clouds {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .floating-cloud {
-      position: absolute;
-      width: 100px;
-      opacity: 0.8;
-      animation: floatCloud 40s linear infinite;
-    }
-
-    .floating-cloud.cloud1 { top: 10%; left: -150px; animation-delay: 0s; }
-    .floating-cloud.cloud2 { top: 25%; left: -180px; animation-delay: 5s; }
-    .floating-cloud.cloud3 { top: 40%; left: -120px; animation-delay: 10s; }
-    .floating-cloud.cloud4 { top: 55%; left: -160px; animation-delay: 15s; }
-    .floating-cloud.cloud5 { top: 70%; left: -100px; animation-delay: 20s; }
-
-    @keyframes floatCloud {
-      0% { transform: translateX(-150px); }
-      100% { transform: translateX(110vw); }
-    }
-
-    .password-container {
-      text-align: center;
-      margin-top: 25vh;
-      z-index: 10;
-      position: relative;
-    }
-
-    .password-container input {
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    #submitPassword {
-      background: linear-gradient(90deg, #cceeff, #ffffff, #e0ccff);
-      color: #336677;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(200, 200, 255, 0.5);
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    #submitPassword:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-    }
-
-    #openGiftButton {
-      display: block;
-      margin: 30px auto 10px auto;
-      background: linear-gradient(to right, #e0ccff, #cceeff);
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 0 12px rgba(200, 200, 255, 0.6);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    #openGiftButton:hover {
-      transform: scale(1.05);
-    }
-
-    #giftGallery {
-      display: none;
-      position: relative;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    #giftGallery.show {
-      display: block;
-    }
-
-    .gift-image {
-      max-width: 200px;
-      margin: 10px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(200, 200, 255, 0.4);
-      transition: transform 0.3s ease;
-    }
-
-    .gift-image:hover {
-      transform: scale(1.05);
-    }
-
-    .message {
-      text-align: center;
-      font-size: 20px;
-      color: #6655aa;
-      font-weight: 500;
-      position: absolute;
-      top: 20vh;
-      width: 100%;
-      animation: fadeInOut 8s ease-in-out forwards;
-    }
-
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(20px); }
-      30% { opacity: 1; transform: translateY(0); }
-      70% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-20px); }
-    }
-
-    #message2 {
-      animation: fadeInOut 6s ease-in-out forwards;
-    }
-
-    .sparkle-container, .rainbow, .bubbles {
-      position: absolute;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .rainbow {
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #c2e9fb);
-      opacity: 0.4;
-      top: 15vh;
-      animation: rainbowFade 6s infinite ease-in-out;
-    }
-
-    @keyframes rainbowFade {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.7; }
-    }
-  </style>
 </head>
 <body>
-  <div id="passwordScreen" class="password-container">
-  <h2>Nhập mật khẩu để mở quà 🎁</h2>
-  <input type="password" id="passwordInput" placeholder="Mật khẩu..." />
-  <button id="submitPassword">Mở khóa</button>
-</div>
+  <!-- Nhạc nền -->
+  <audio id="bg-music" src="you-vietra.mp3" loop></audio>
 
-<!-- Hiệu ứng mây bồng bềnh -->
-<div class="clouds">
-  <img src="cloud.png" class="floating-cloud cloud1" />
-  <img src="cloud.png" class="floating-cloud cloud2" />
-  <img src="cloud.png" class="floating-cloud cloud3" />
-  <img src="cloud.png" class="floating-cloud cloud4" />
-  <img src="cloud.png" class="floating-cloud cloud5" />
-</div>
+  <!-- Giao diện nhập mật khẩu -->
+  <div id="password-screen">
+    <img src="cloud.nen.jpg" alt="background" class="background" />
+    <div class="clouds"></div>
+    <div class="password-box">
+      <h2>Mở quà sinh nhật nhé</h2>
+      <div id="countdown">10</div>
+      <input type="password" id="password" placeholder="Nhập mật khẩu..." disabled />
+      <button id="submit-btn" disabled>Mở quà</button>
+      <div id="message"></div>
+    </div>
+  </div>
 
-<!-- Nhạc nền -->
-<audio id="bgm" src="You-Vietra.mp3" loop></audio>
+  <!-- Giao diện chính sau khi mở quà -->
+  <div id="main-content" class="hidden">
+    <video id="video1" src="milkdream.mp4" autoplay muted></video>
+    <video id="video2" src="dreamy-video.mp4" loop muted></video>
+    <div id="greetings"></div>
+    <button id="gift-btn" class="hidden">Món quà dành riêng cho cậu ✨</button>
+    <div id="gift-box" class="hidden">
+      <span id="close-gift">&times;</span>
+      <div class="gift-images">
+        <img src="gift-image.png" />
+        <img src="gift-image1.jpeg" />
+        <img src="gift-image2.jpeg" />
+        <img src="gift-image3.webp" />
+        <img src="gift-image4.webp" />
+      </div>
+      <div class="feedback-box">
+        <p class="final-message">Tớ muốn gửi một lời nhắn nhỏ thôi...\p>
+        <button class="feedback-btn">Milk</button>
+        <button class="feedback-btn">Fuyuhi</button>
+        <button class="feedback-btn cancel">Hủy</button>
+      </div>
+    </div>
+  </div>
 
-<!-- Video đầu tiên: cô gái nhìn mây -->
-<video id="firstVideo" style="display:none; width:100%; height:auto;" src="milkdream.mp4"></video>
-
-<!-- Video nền mây dreamy lặp lại -->
-<video id="secondVideo" style="display:none; width:100%; height:auto;" src="dreamy-video.mp4" loop muted></video>
-
-<!-- Lời chúc đầu -->
-<div id="message1" class="message" style="display:none;">
-  <p>Chúc mừng sinh nhật cậu 💖</p>
-  <p>Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ ✨</p>
-  <p>Hãy nhấn vào đây để mở món quà nhỏ xíu tớ dành riêng cho cậu 🎁</p>
-</div>
-
-<!-- Lời chúc sau cùng -->
-<div id="message2" class="message" style="display:none;">
-  🌸 Happy Birthday Milk 💖<br />
-  Let’s step into a dreamy world together ☁️
-</div>
-
-<!-- Nút mở quà -->
-<button id="openGiftButton" style="display:none;">Mở quà dành riêng cho cậu 🎀</button>
-
-<!-- Hộp quà hình ảnh -->
-<div id="giftGallery">
-  <img src="gift-image.png" alt="Gift" class="gift-image" />
-</div>
-
-<!-- Tiny letter (hiển thị cuối cùng cùng quà) -->
-<div id="tinyLetter" class="message" style="display:none;">
-  Một bức thư nhỏ xíu dành riêng cho cậu 💌
-</div>
-
-<!-- phần HTML giữ nguyên như trước đó -->
-<script>
-  const correctPassword = "Milk10/6";
-
-  document.getElementById("submitPassword").addEventListener("click", () => {
-    const enteredPassword = document.getElementById("passwordInput").value;
-
-    if (enteredPassword === correctPassword) {
-      startBirthdaySequence();
-    } else {
-      alert("❌ Sai mật khẩu rồi nè 😢");
-    }
-  });
-
-  function startBirthdaySequence() {
-    document.getElementById("passwordScreen").style.display = "none";
-
-    const bgm = document.getElementById("bgm");
-    const firstVideo = document.getElementById("firstVideo");
-    const secondVideo = document.getElementById("secondVideo");
-    const msg1 = document.getElementById("message1");
-    const msg2 = document.getElementById("message2");
-    const giftButton = document.getElementById("openGiftButton");
-    const giftGallery = document.getElementById("giftGallery");
-    const tinyLetter = document.getElementById("tinyLetter");
-
-    bgm.play();
-    firstVideo.style.display = "block";
-    firstVideo.loop = false;
-    firstVideo.currentTime = 0;
-    firstVideo.play();
-
-    msg1.style.display = "block";
-    msg1.style.opacity = 0;
-    msg1.animate([{ opacity: 0 }, { opacity: 1 }], {
-      duration: 5000,
-      fill: "forwards"
-    });
-
-    setTimeout(() => {
-      msg1.animate([{ opacity: 1 }, { opacity: 0 }], {
-        duration: 3000,
-        fill: "forwards"
-      });
-    }, 7000);
-
-    setTimeout(() => {
-      firstVideo.pause();
-      firstVideo.style.display = "none";
-
-      secondVideo.style.display = "block";
-      secondVideo.play();
-
-      msg1.style.display = "none";
-      msg2.style.display = "block";
-      msg2.style.opacity = 0;
-
-      msg2.animate([{ opacity: 0 }, { opacity: 1 }], {
-        duration: 1000,
-        fill: "forwards"
-      });
-
-      setTimeout(() => {
-        giftButton.style.display = "block";
-        giftGallery.style.display = "block";
-        tinyLetter.style.display = "block";
-      }, 4000);
-    }, 10000);
-  }
-
-  document.getElementById("openGiftButton").addEventListener("click", () => {
-    const giftGallery = document.getElementById("giftGallery");
-    giftGallery.classList.toggle("show");
-  });
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
