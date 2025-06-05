@@ -109,4 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < 6; i++) {
     createFloatingCloud("images.png", "size" + (i % 3), 30 + Math.random() * 20, Math.random() * 80, Math.random() * 100);
   }
+
+  // Inject floating cloud styles
+  const style = document.createElement('style');
+  style.textContent = `
+    .floating-cloud {
+      position: absolute;
+      animation: floatCloud linear infinite;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    @keyframes floatCloud {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(100vw);
+      }
+    }
+
+    .size0 { width: 60px; }
+    .size1 { width: 90px; }
+    .size2 { width: 120px; }
+  `;
+  document.head.appendChild(style);
 });
