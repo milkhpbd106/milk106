@@ -1,189 +1,149 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const countdownEl = document.getElementById("countdown");
-  const passwordInput = document.getElementById("password");
-  const submitBtn = document.getElementById("submit");
-  const message = document.getElementById("message");
-  const passwordScreen = document.getElementById("password-screen");
-  const mainContent = document.getElementById("main-content");
-  const wishes = document.querySelectorAll(".wish-text");
-  const video1 = document.getElementById("video1");
-  const video2 = document.getElementById("video2");
-  const music = document.getElementById("bg-music");
-  const openGiftBtn = document.getElementById("openGift");
-  const giftBox = document.getElementById("gift-box");
-  const feedbackSection = document.getElementById("feedback-section");
-  const cloudContainer = document.getElementById("clouds");
-  const leftArrow = document.getElementById("left-arrow");
-  const rightArrow = document.getElementById("right-arrow");
+// script.js
 
-  // Password input is enabled immediately
-  passwordInput.disabled = false;
-  message.textContent = "🎉 Hôm nay là ngày gì nào 💖";
+let countdown = 10;
+const countdownEl = document.getElementById('countdown');
+const passwordInput = document.getElementById('password-input');
+const unlockBtn = document.getElementById('unlock-btn');
+const lockMessage = document.getElementById('lock-message');
+const lockScreen = document.getElementById('lock-screen');
+const mainContent = document.getElementById('main-content');
+const introVideo = document.getElementById('intro-video');
+const loopVideo = document.getElementById('loop-video');
+const bgm = document.getElementById('bgm');
+const greetings = document.getElementById('greetings');
+const moreGreetings = document.getElementById('more-greetings');
+const giftBtn = document.getElementById('gift-btn');
+const giftImages = document.getElementById('gift-images');
+const finalMessage = document.getElementById('final-message');
+const arrowLeft = document.getElementById('arrow-left');
+const arrowRight = document.getElementById('arrow-right');
+const cloudContainer = document.getElementById('cloud-container');
 
-  // Password logic
-  submitBtn.addEventListener("click", () => {
-    if (passwordInput.value !== "milk106") {
-      message.textContent = "Sai mật khẩu ❌";
-      return;
-    }
-
-    message.textContent = "";
-    passwordInput.disabled = true;
-    submitBtn.disabled = true;
-
-    let enterWait = 10;
-    const enterCountdown = setInterval(() => {
-      enterWait--;
-      countdownEl.textContent = enterWait;
-      if (enterWait === 0) {
-        clearInterval(enterCountdown);
-        passwordScreen.classList.add("hidden");
-        mainContent.classList.remove("hidden");
-        startCelebration();
-      }
-    }, 1000);
-  });
-
-  function startCelebration() {
-    music.loop = true;
-    music.play();
-
-    video1.classList.remove("hidden");
-    video1.loop = true;
-    video1.play();
-
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < 3) {
-        wishes[index].classList.add("visible");
-        index++;
-      } else {
-        clearInterval(interval);
-        setTimeout(() => {
-          video1.classList.add("fade-out");
-          setTimeout(() => {
-            video1.classList.add("hidden");
-            video2.classList.remove("hidden");
-            showLoopWishes();
-            leftArrow.classList.remove("hidden");
-            rightArrow.classList.remove("hidden");
-
-            setTimeout(() => {
-              openGiftBtn.classList.remove("hidden");
-              // Show feedback section after 10s
-              setTimeout(() => {
-                feedbackSection.classList.remove("hidden");
-              }, 10000);
-            }, 6000); // delay until wish4 and wish5 fade in and disappear
-
-          }, 3000);
-        }, 1000);
-      }
-    }, 2500);
+// Countdown start
+const countdownInterval = setInterval(() => {
+  countdown--;
+  countdownEl.textContent = countdown;
+  if (countdown === 5) {
+    document.getElementById('countdown-title').textContent = 'Hôm nay là ngày gì nào? 🎈';
   }
+  if (countdown <= 0) {
+    clearInterval(countdownInterval);
+    countdownEl.style.display = 'none';
+    passwordInput.disabled = false;
+    unlockBtn.disabled = false;
+    document.getElementById('countdown-title').textContent = 'Nhập mật khẩu mở quà nhé 🎀';
+  }
+}, 1000);
 
-  function showLoopWishes() {
-    video2.loop = true;
-    video2.play();
-    wishes[3].classList.add("visible");
+// Password check
+function checkPassword() {
+  const password = passwordInput.value;
+  if (password === 'Milk10/6') {
+    lockScreen.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+    introVideo.classList.remove('hidden');
+    introVideo.play();
+    bgm.play();
     setTimeout(() => {
-      wishes[4].classList.add("visible");
-    }, 3000);
-    // Hide them again after 6s
+      introVideo.classList.add('fade-out');
+      setTimeout(() => {
+        introVideo.classList.add('hidden');
+        loopVideo.classList.remove('hidden');
+        loopVideo.play();
+        arrowLeft.classList.remove('hidden');
+        arrowRight.classList.remove('hidden');
+        showGreetingLines();
+      }, 3000);
+    }, 10000);
+  } else {
+    lockMessage.textContent = 'Sai mật khẩu rồi 😢';
+  }
+}
+
+// Hiện từng dòng lời chúc
+function showGreetingLines() {
+  const lines = [
+    '🎂 Chúc mừng sinh nhật cậu!',
+    '🌸 Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.',
+    '🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu'
+  ];
+  const moreLines = [
+    '🌈 Mỗi khoảnh khắc bên cậu đều như một giấc mơ dễ thương.',
+    '💖 Tớ rất biết ơn vì cậu tồn tại trên thế giới này.'
+  ];
+  const greetingLines = greetings.querySelectorAll('.line');
+  lines.forEach((line, i) => {
     setTimeout(() => {
-      wishes[3].classList.remove("visible");
-      wishes[4].classList.remove("visible");
-    }, 6000);
+      greetingLines[i].textContent = line;
+      greetingLines[i].classList.add('fade-in');
+    }, i * 2500);
+  });
+
+  setTimeout(() => {
+    greetings.classList.add('hidden');
+    moreGreetings.classList.remove('hidden');
+    const moreGreetingLines = moreGreetings.querySelectorAll('.line');
+    moreLines.forEach((line, i) => {
+      setTimeout(() => {
+        moreGreetingLines[i].textContent = line;
+        moreGreetingLines[i].classList.add('fade-in-glow');
+      }, i * 3000);
+    });
+  }, 9000);
+
+  setTimeout(() => {
+    giftBtn.classList.remove('hidden');
+  }, 18000);
+}
+
+// Mở quà
+function toggleGift() {
+  giftImages.classList.remove('hidden');
+  finalMessage.classList.remove('hidden');
+  giftBtn.classList.add('hidden');
+}
+
+// Chuyển video
+arrowLeft.addEventListener('click', () => {
+  loopVideo.src = 'milkdream.mp4';
+  loopVideo.play();
+});
+arrowRight.addEventListener('click', () => {
+  loopVideo.src = 'dreamy-video.mp4';
+  loopVideo.play();
+});
+
+// Hiệu ứng click
+window.addEventListener('click', (e) => {
+  const effect = document.createElement('div');
+  effect.className = 'click-effect';
+  effect.style.top = `${e.clientY}px`;
+  effect.style.left = `${e.clientX}px`;
+  document.body.appendChild(effect);
+  setTimeout(() => effect.remove(), 1000);
+});
+
+// Gửi phản hồi
+function sendReply() {
+  const name = document.getElementById('reply-name').value.trim();
+  const message = document.getElementById('reply-message').value.trim();
+  if (name && message) {
+    alert(`Cảm ơn ${name} đã gửi lời nhắn 💌\n\n"${message}"`);
+  } else {
+    alert('Viết gì đó rồi gửi nè~ 📝');
   }
+}
 
-  // Arrow navigation after intro
-  leftArrow.addEventListener("click", () => {
-    addClickEffect(leftArrow);
-    video2.pause();
-    video2.classList.add("hidden");
-    video1.classList.remove("hidden");
-    video1.play();
-  });
-
-  rightArrow.addEventListener("click", () => {
-    addClickEffect(rightArrow);
-    video1.pause();
-    video1.classList.add("hidden");
-    video2.classList.remove("hidden");
-    video2.play();
-  });
-
-  function addClickEffect(el) {
-    el.classList.add("clicked");
-    setTimeout(() => el.classList.remove("clicked"), 300);
-  }
-
-  // Gift click
-  openGiftBtn.addEventListener("click", () => {
-    if (giftBox.classList.contains("hidden")) {
-      giftBox.classList.remove("hidden");
-    } else {
-      giftBox.classList.add("hidden");
-    }
-  });
-
-  // Sparkle click effect
-  document.body.addEventListener("click", (e) => {
-    const sparkle = document.createElement("div");
-    sparkle.className = "sparkle";
-    sparkle.style.left = `${e.pageX - 5}px`;
-    sparkle.style.top = `${e.pageY - 5}px`;
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 1000);
-  });
-
-  // Animate floating clouds
-  function createFloatingCloud(imgSrc, size, duration, startTop, startLeft) {
-    const cloud = document.createElement("img");
-    cloud.src = imgSrc;
-    cloud.className = `floating-cloud ${size}`;
-    cloud.style.top = `${startTop}%`;
-    cloud.style.left = `${startLeft}%`;
-    cloud.style.animationDuration = `${duration}s`;
+// Mây bay giao diện nhập mật khẩu
+function animateClouds() {
+  for (let i = 0; i < 6; i++) {
+    const cloud = document.createElement('img');
+    cloud.src = 'images.png';
+    cloud.className = 'floating-cloud';
+    cloud.style.top = Math.random() * 80 + '%';
+    cloud.style.left = Math.random() * 90 + '%';
     cloudContainer.appendChild(cloud);
   }
+}
 
-  for (let i = 0; i < 6; i++) {
-    createFloatingCloud("images.png", "size" + (i % 3), 30 + Math.random() * 20, Math.random() * 80, Math.random() * 100);
-  }
-
-  // Inject floating cloud styles
-  const style = document.createElement('style');
-  style.textContent = `
-    .floating-cloud {
-      position: absolute;
-      animation: floatCloud linear infinite;
-      pointer-events: none;
-      opacity: 0.7;
-      z-index: 1;
-    }
-
-    @keyframes floatCloud {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(100vw);
-      }
-    }
-
-    .size0 { width: 60px; }
-    .size1 { width: 90px; }
-    .size2 { width: 120px; }
-
-    .fade-out {
-      opacity: 0;
-      transition: opacity 3s ease;
-    }
-
-    .clicked {
-      box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
-    }
-  `;
-  document.head.appendChild(style);
-});
+animateClouds();
