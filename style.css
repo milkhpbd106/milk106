@@ -1,138 +1,69 @@
-/* Reset */
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #dff6ff;
-  color: white;
+  background: url('cloud.nen.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#lock-screen {
+  position: relative;
+  height: 100vh;
   text-align: center;
+  padding-top: 20vh;
+  color: #fff;
+}
+
+.title {
+  font-size: 3em;
+  background: linear-gradient(to right, #a0e9fd, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #a0e9fd;
+  }
+  to {
+    text-shadow: 0 0 20px #ffffff;
+  }
+}
+
+#clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('images.png') repeat-x;
+  animation: moveClouds 60s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveClouds {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 0;
+  }
 }
 
 .hidden {
   display: none;
 }
 
-.center-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+#main-content {
   position: relative;
-  z-index: 2;
-}
-
-#entry-screen {
-  background-image: url('assets/cloud.nen.jpg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.clouds {
-  background-image: url('assets/images.png');
-  background-repeat: repeat-x;
-  background-size: contain;
-  width: 200%;
   height: 100vh;
+  text-align: center;
+  color: #fff;
+}
+
+video {
   position: absolute;
-  top: 0;
-  left: 0;
-  animation: moveClouds 60s linear infinite;
-  z-index: 1;
-}
-
-@keyframes moveClouds {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-#password-form input {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-right: 10px;
-}
-
-#password-form button {
-  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
-  border: none;
-  padding: 10px 20px;
-  color: #004d40;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#password-form button:hover {
-  background: #a0e1ff;
-  box-shadow: 0 0 10px #7fd9f5;
-}
-
-#password-message {
-  margin-top: 10px;
-  font-size: 16px;
-}
-
-.background-video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-#messages-container {
-  position: absolute;
-  top: 20%;
   width: 100%;
-  font-size: 24px;
-  font-weight: 500;
-  color: #ffffff;
-  text-shadow: 1px 1px 3px #888;
-  animation: fadeIn 2s ease-in-out;
-}
-
-#gift-button {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f2faff;
-  color: #333;
-  padding: 15px 30px;
-  border-radius: 10px;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 0 10px #a0e1ff;
-  transition: 0.3s;
-}
-
-#gift-button:hover {
-  box-shadow: 0 0 20px #7fd9f5;
-  background-color: #e1f7ff;
-}
-
-#gift-box {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 5;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 20px;
-}
-
-#gift-box img {
-  max-width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255,255,255,0.5);
-}
+  height: 100%;
+  object-fit: cover
+::contentReference[oaicite:0]{index=0}
+ 
