@@ -16,17 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const leftArrow = document.getElementById("left-arrow");
   const rightArrow = document.getElementById("right-arrow");
 
-  // Countdown to unlock input
-  let timeLeft = 10;
-  const countdownInterval = setInterval(() => {
-    timeLeft--;
-    countdownEl.textContent = timeLeft;
-    if (timeLeft === 0) {
-      clearInterval(countdownInterval);
-      passwordInput.disabled = false;
-      message.textContent = "";
-    }
-  }, 1000);
+  // Password input is enabled immediately
+  passwordInput.disabled = false;
+  message.textContent = "🎉 Hôm nay là ngày gì nào 💖";
 
   // Password logic
   submitBtn.addEventListener("click", () => {
@@ -35,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    message.textContent = "🎉 Hôm nay là ngày gì nào 💖";
+    message.textContent = "";
     passwordInput.disabled = true;
     submitBtn.disabled = true;
 
@@ -78,10 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
               openGiftBtn.classList.remove("hidden");
+              // Show feedback section after 10s
               setTimeout(() => {
                 feedbackSection.classList.remove("hidden");
               }, 10000);
-            }, 6000);
+            }, 6000); // delay until wish4 and wish5 fade in and disappear
+
           }, 3000);
         }, 1000);
       }
@@ -95,12 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       wishes[4].classList.add("visible");
     }, 3000);
+    // Hide them again after 6s
     setTimeout(() => {
       wishes[3].classList.remove("visible");
       wishes[4].classList.remove("visible");
     }, 6000);
   }
 
+  // Arrow navigation after intro
   leftArrow.addEventListener("click", () => {
     addClickEffect(leftArrow);
     video2.pause();
@@ -122,11 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => el.classList.remove("clicked"), 300);
   }
 
+  // Gift click
   openGiftBtn.addEventListener("click", () => {
-    giftBox.classList.toggle("hidden");
-    giftBox.classList.toggle("gift-explode");
+    if (giftBox.classList.contains("hidden")) {
+      giftBox.classList.remove("hidden");
+    } else {
+      giftBox.classList.add("hidden");
+    }
   });
 
+  // Sparkle click effect
   document.body.addEventListener("click", (e) => {
     const sparkle = document.createElement("div");
     sparkle.className = "sparkle";
@@ -136,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => sparkle.remove(), 1000);
   });
 
+  // Animate floating clouds
   function createFloatingCloud(imgSrc, size, duration, startTop, startLeft) {
     const cloud = document.createElement("img");
     cloud.src = imgSrc;
@@ -150,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createFloatingCloud("images.png", "size" + (i % 3), 30 + Math.random() * 20, Math.random() * 80, Math.random() * 100);
   }
 
+  // Inject floating cloud styles
   const style = document.createElement('style');
   style.textContent = `
     .floating-cloud {
@@ -180,21 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     .clicked {
       box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
-    }
-
-    .gift-explode img {
-      animation: explode 0.8s ease forwards;
-    }
-
-    @keyframes explode {
-      0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1.5) translate(var(--x, 100px), var(--y, -100px));
-        opacity: 1;
-      }
     }
   `;
   document.head.appendChild(style);
