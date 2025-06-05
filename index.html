@@ -3,71 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎂 Món Quà Cho Milk</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Chúc mừng sinh nhật Milk</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Mây bay nền -->
+  <div class="clouds"></div>
 
-  <!-- Nhạc nền -->
-  <audio id="bg-music" src="assets/you-vietra.mp3" loop></audio>
-
-  <!-- Đám mây bay nền -->
-  <div class="cloud-layer" id="cloud-container"></div>
-
-  <!-- Giao diện nhập mật khẩu -->
-  <div id="entry-screen" class="center-screen">
-    <div class="countdown-box">
-      <p id="count-text" class="message-text">⏳ Kiên nhẫn một chút nhé tôi có chút chậm 😔</p>
-      <p id="countdown" class="count-number">10</p>
-    </div>
-
+  <!-- Form mật khẩu -->
+  <div id="password-container">
+    <div id="countdown-message"></div>
+    <div id="countdown-timer">10</div>
     <form id="password-form" class="hidden">
       <input type="password" id="password" placeholder="Nhập mật khẩu..." />
-      <button type="submit" class="unlock-button">✨ Mở Quà</button>
-      <p id="password-message" class="message-text"></p>
+      <button type="submit">Mở quà 🎁</button>
     </form>
+    <div id="error-message"></div>
   </div>
 
-  <!-- Giao diện chính sau khi nhập đúng mật khẩu -->
-  <div id="main-screen" class="hidden">
-    <!-- Video nền -->
-    <video id="video1" class="background-video" src="assets/milkdream.mp4" muted></video>
-    <video id="video2" class="background-video hidden" src="assets/dreamy-video.mp4" muted loop></video>
+  <!-- Giao diện video -->
+  <div id="video-section" class="hidden">
+    <audio id="bg-music" src="assets/audio/you-vietra.mp3" loop></audio>
 
-    <!-- Mũi tên chuyển video -->
-    <button id="prev-video" class="video-nav hidden">←</button>
-    <button id="next-video" class="video-nav hidden">→</button>
+    <video id="video1" class="video-bg" muted>
+      <source src="assets/video/milkdream.mp4" type="video/mp4" />
+    </video>
 
-    <!-- Chữ chúc mừng -->
-    <div id="messages-container"></div>
+    <video id="video2" class="video-bg hidden" muted loop>
+      <source src="assets/video/dreamy-video.mp4" type="video/mp4" />
+    </video>
 
-    <!-- Nút mở quà -->
-    <button id="gift-button" class="hidden">🎁 Món quà dành riêng cho cậu</button>
+    <div id="messages"></div>
 
-    <!-- Hộp quà -->
-    <div id="gift-box" class="hidden">
-      <img src="assets/gift-image.png" />
-      <img src="assets/gift-image1.jpeg" />
-      <img src="assets/gift-image2.jpeg" />
-      <img src="assets/gift-image3.webp" />
-      <img src="assets/gift-image4.webp" />
+    <button id="gift-btn" class="hidden">🎁 Món quà dành riêng cho cậu</button>
+
+    <div id="gift-gallery" class="hidden">
+      <img src="assets/images/gift-image.png" />
+      <img src="assets/images/gift-image1.jpeg" />
+      <img src="assets/images/gift-image2.jpeg" />
+      <img src="assets/images/gift-image3.webp" />
+      <img src="assets/images/gift-image4.webp" />
     </div>
 
-    <!-- Phản hồi -->
-    <div id="feedback-box" class="hidden">
-      <p class="message-text">💌 Bạn muốn gửi lời nhắn với tư cách:</p>
-      <select id="from-who">
-        <option value="Milk">Milk</option>
-        <option value="Fuyuhi">Fuyuhi</option>
-      </select>
-      <textarea id="feedback-text" placeholder="Viết lời nhắn ở đây..."></textarea>
-      <button id="send-feedback">📩 Gửi phản hồi</button>
+    <div id="feedback" class="hidden">
+      <p>💬 Nhập một lời nhắn dễ thương nhé:</p>
+      <textarea placeholder="Tớ là Milk hoặc Fuyuhi nè..."></textarea>
+      <button>Gửi phản hồi</button>
     </div>
   </div>
 
-  <!-- Hiệu ứng click -->
-  <div id="sparkle-container"></div>
-
-  <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
