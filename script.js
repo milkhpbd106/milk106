@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openGiftBtn = document.getElementById("openGift");
   const giftBox = document.getElementById("gift-box");
   const feedbackSection = document.getElementById("feedback-section");
+  const cloudContainer = document.getElementById("clouds");
 
   // Countdown to unlock input
   let timeLeft = 10;
@@ -93,4 +94,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 1000);
   });
+
+  // Animate floating clouds
+  function createFloatingCloud(imgSrc, size, duration, startTop, startLeft) {
+    const cloud = document.createElement("img");
+    cloud.src = imgSrc;
+    cloud.className = `floating-cloud ${size}`;
+    cloud.style.top = `${startTop}%`;
+    cloud.style.left = `${startLeft}%`;
+    cloud.style.animationDuration = `${duration}s`;
+    cloudContainer.appendChild(cloud);
+  }
+
+  for (let i = 0; i < 6; i++) {
+    createFloatingCloud("images.png", "size" + (i % 3), 30 + Math.random() * 20, Math.random() * 80, Math.random() * 100);
+  }
 });
