@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const giftBox = document.getElementById("gift-box");
   const feedbackSection = document.getElementById("feedback-section");
   const cloudContainer = document.getElementById("clouds");
+  const leftArrow = document.getElementById("left-arrow");
+  const rightArrow = document.getElementById("right-arrow");
 
   // Countdown to unlock input
   let timeLeft = 10;
@@ -51,10 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function startCelebration() {
+    music.loop = true;
     music.play();
+
+    video1.classList.remove("hidden");
+    video1.loop = true;
     video1.play();
 
-    // Show wishes one by one during video1
     let index = 0;
     const interval = setInterval(() => {
       if (index < 3) {
@@ -63,21 +68,42 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         clearInterval(interval);
         setTimeout(() => {
-          video1.classList.add("hidden");
-          video2.classList.remove("hidden");
-          showLoopWishes();
-        }, 3000);
+          video1.classList.add("fade-out");
+          setTimeout(() => {
+            video1.classList.add("hidden");
+            video2.classList.remove("hidden");
+            showLoopWishes();
+            leftArrow.classList.remove("hidden");
+            rightArrow.classList.remove("hidden");
+          }, 3000);
+        }, 1000);
       }
     }, 2500);
   }
 
   function showLoopWishes() {
+    video2.loop = true;
     video2.play();
     wishes[3].classList.add("visible");
     setTimeout(() => {
       wishes[4].classList.add("visible");
     }, 3000);
   }
+
+  // Arrow navigation after intro
+  leftArrow.addEventListener("click", () => {
+    video2.pause();
+    video2.classList.add("hidden");
+    video1.classList.remove("hidden");
+    video1.play();
+  });
+
+  rightArrow.addEventListener("click", () => {
+    video1.pause();
+    video1.classList.add("hidden");
+    video2.classList.remove("hidden");
+    video2.play();
+  });
 
   // Gift click
   openGiftBtn.addEventListener("click", () => {
@@ -133,6 +159,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .size0 { width: 60px; }
     .size1 { width: 90px; }
     .size2 { width: 120px; }
+
+    .fade-out {
+      opacity: 0;
+      transition: opacity 3s ease;
+    }
   `;
   document.head.appendChild(style);
 });
