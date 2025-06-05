@@ -3,34 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Món quà cho Milk 🎁</title>
+  <title>🎂 Món Quà Cho Milk</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <!-- Nhạc nền -->
   <audio id="bg-music" src="assets/you-vietra.mp3" loop></audio>
 
-  <!-- Giao diện nền nhập mật khẩu -->
-  <div class="clouds"></div>
+  <!-- Đám mây bay nền -->
+  <div class="cloud-layer" id="cloud-container"></div>
+
+  <!-- Giao diện nhập mật khẩu -->
   <div id="entry-screen" class="center-screen">
-    <div id="countdown-box">
-      <p class="fade-in" id="wait-text">Kiên nhẫn một chút nhé tôi có chút chậm...</p>
-      <p id="countdown">10</p>
-      <p id="day-question" class="hidden">Hôm nay là ngày gì nào? 🌤️</p>
+    <div class="countdown-box">
+      <p id="count-text" class="message-text">⏳ Kiên nhẫn một chút nhé tôi có chút chậm 😔</p>
+      <p id="countdown" class="count-number">10</p>
     </div>
 
     <form id="password-form" class="hidden">
-      <input type="password" id="password" placeholder="Nhập mật khẩu..." required />
-      <button type="submit">🔓 Mở quà</button>
-      <p id="password-message"></p>
+      <input type="password" id="password" placeholder="Nhập mật khẩu..." />
+      <button type="submit" class="unlock-button">✨ Mở Quà</button>
+      <p id="password-message" class="message-text"></p>
     </form>
   </div>
 
-  <!-- Màn hình chính sau khi mở khóa -->
+  <!-- Giao diện chính sau khi nhập đúng mật khẩu -->
   <div id="main-screen" class="hidden">
+    <!-- Video nền -->
     <video id="video1" class="background-video" src="assets/milkdream.mp4" muted></video>
     <video id="video2" class="background-video hidden" src="assets/dreamy-video.mp4" muted loop></video>
+
+    <!-- Mũi tên chuyển video -->
+    <button id="prev-video" class="video-nav hidden">←</button>
+    <button id="next-video" class="video-nav hidden">→</button>
+
+    <!-- Chữ chúc mừng -->
     <div id="messages-container"></div>
+
+    <!-- Nút mở quà -->
     <button id="gift-button" class="hidden">🎁 Món quà dành riêng cho cậu</button>
+
+    <!-- Hộp quà -->
     <div id="gift-box" class="hidden">
       <img src="assets/gift-image.png" />
       <img src="assets/gift-image1.jpeg" />
@@ -38,7 +52,21 @@
       <img src="assets/gift-image3.webp" />
       <img src="assets/gift-image4.webp" />
     </div>
+
+    <!-- Phản hồi -->
+    <div id="feedback-box" class="hidden">
+      <p class="message-text">💌 Bạn muốn gửi lời nhắn với tư cách:</p>
+      <select id="from-who">
+        <option value="Milk">Milk</option>
+        <option value="Fuyuhi">Fuyuhi</option>
+      </select>
+      <textarea id="feedback-text" placeholder="Viết lời nhắn ở đây..."></textarea>
+      <button id="send-feedback">📩 Gửi phản hồi</button>
+    </div>
   </div>
+
+  <!-- Hiệu ứng click -->
+  <div id="sparkle-container"></div>
 
   <script src="scripts.js"></script>
 </body>
