@@ -75,6 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
             showLoopWishes();
             leftArrow.classList.remove("hidden");
             rightArrow.classList.remove("hidden");
+
+            setTimeout(() => {
+              openGiftBtn.classList.remove("hidden");
+              // Show feedback section after 10s
+              setTimeout(() => {
+                feedbackSection.classList.remove("hidden");
+              }, 10000);
+            }, 6000); // delay until wish4 and wish5 fade in and disappear
+
           }, 3000);
         }, 1000);
       }
@@ -88,10 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       wishes[4].classList.add("visible");
     }, 3000);
+    // Hide them again after 6s
+    setTimeout(() => {
+      wishes[3].classList.remove("visible");
+      wishes[4].classList.remove("visible");
+    }, 6000);
   }
 
   // Arrow navigation after intro
   leftArrow.addEventListener("click", () => {
+    addClickEffect(leftArrow);
     video2.pause();
     video2.classList.add("hidden");
     video1.classList.remove("hidden");
@@ -99,16 +114,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   rightArrow.addEventListener("click", () => {
+    addClickEffect(rightArrow);
     video1.pause();
     video1.classList.add("hidden");
     video2.classList.remove("hidden");
     video2.play();
   });
 
+  function addClickEffect(el) {
+    el.classList.add("clicked");
+    setTimeout(() => el.classList.remove("clicked"), 300);
+  }
+
   // Gift click
   openGiftBtn.addEventListener("click", () => {
-    giftBox.classList.remove("hidden");
-    feedbackSection.classList.remove("hidden");
+    if (giftBox.classList.contains("hidden")) {
+      giftBox.classList.remove("hidden");
+    } else {
+      giftBox.classList.add("hidden");
+    }
   });
 
   // Sparkle click effect
@@ -163,6 +187,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .fade-out {
       opacity: 0;
       transition: opacity 3s ease;
+    }
+
+    .clicked {
+      box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
     }
   `;
   document.head.appendChild(style);
