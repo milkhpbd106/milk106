@@ -1,66 +1,77 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Món Quà Sinh Nhật 🎁</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Milk</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Màn hình khóa -->
-  <div id="lock-screen">
-    <div id="cloud-container"></div>
-    <div class="lock-box">
-      <h2 id="countdown-title">Kiên nhẫn một chút nhé, tôi có chút chậm... 😔</h2>
-      <div id="countdown">10</div>
-      <input id="password-input" type="password" placeholder="Nhập mật khẩu..." disabled />
-      <button id="unlock-btn" onclick="checkPassword()" disabled class="glow-btn">Mở quà ✨</button>
-      <div id="lock-message"></div>
-    </div>
+
+<!-- LOCK SCREEN -->
+<div id="lock-screen">
+  <div id="cloud-container">
+    <!-- 7 cục mây images.png -->
+    <img src="images.png" class="cloud" style="top:10%; left:-100px;">
+    <img src="images.png" class="cloud" style="top:20%; left:-200px;">
+    <img src="images.png" class="cloud" style="top:30%; left:-300px;">
+    <img src="images.png" class="cloud" style="top:40%; left:-400px;">
+    <img src="images.png" class="cloud" style="top:50%; left:-500px;">
+    <img src="images.png" class="cloud" style="top:60%; left:-600px;">
+    <img src="images.png" class="cloud" style="top:70%; left:-700px;">
   </div>
 
-  <!-- Nội dung chính -->
-  <div id="main-content" class="hidden">
-    <audio id="bgm" src="you-vietra.mp3" loop></audio>
-    <video id="intro-video" class="video" src="milkdream.mp4"></video>
-    <video id="loop-video" class="video hidden" src="dreamy-video.mp4" loop></video>
-
-    <div id="greetings" class="greeting-box">
-      <p class="line">🎉 Chúc mừng sinh nhật cậu!</p>
-      <p class="line">🌟 Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.</p>
-      <p class="line">🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu nhé!</p>
-    </div>
-
-    <div id="more-greetings" class="greeting-box hidden">
-      <p class="line">🌸 Happy Birthday Milk 💖</p>
-      <p class="line">🌈 Let’s step into a dreamy world together ✨</p>
-      <p class="line">💖 Mong rằng những điều nhỏ xinh này sẽ làm cậu mỉm cười.</p>
-      <p class="line">🌈 Mãi mãi yêu thương và nhớ về nhau thật nhiều nha.</p>
-    </div>
-
-    <div id="gift-btn" class="hidden">
-      <button onclick="toggleGift()" class="glow-btn">🎁 Món quà dành riêng cho cậu</button>
-    </div>
-
-    <div id="gift-images" class="gift-box hidden">
-      <img src="gift-image.png" />
-      <img src="gift-image1.jpeg" />
-      <img src="gift-image2.jpeg" />
-      <img src="gift-image3.webp" />
-      <img src="gift-image4.webp" />
-    </div>
-
-    <div id="final-message" class="hidden">
-      <p>🌸 Tớ mong cậu thích những điều nhỏ xinh này 💖</p>
-      <input id="reply-name" type="text" placeholder="Tên cậu..." />
-      <textarea id="reply-message" placeholder="Lời nhắn của cậu..."></textarea>
-      <button onclick="sendReply()">💌 Gửi lại lời nhắn</button>
-    </div>
-
-    <div id="arrow-left" class="arrow hidden" onclick="goToIntroVideo()">⬅</div>
-    <div id="arrow-right" class="arrow hidden" onclick="goToLoopVideo()">➡</div>
+  <div class="lock-box">
+    <div id="countdown">10</div>
+    <input type="password" id="password" placeholder="Nhập mật khẩu..." disabled>
+    <button class="glow-btn" id="unlock-btn" disabled>Mở quà</button>
+    <div id="error-msg" style="margin-top:10px;"></div>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<!-- VIDEO 1 + CÂU CHÚC -->
+<video id="video1" class="video hidden" src="milkdream.mp4"></video>
+<div class="greeting-box" id="greetings1">
+  <div class="line" id="greet1">🎂 Chúc mừng sinh nhật cậu!</div>
+  <div class="line" id="greet2">✨ Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.</div>
+  <div class="line" id="greet3">🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu.</div>
+</div>
+
+<!-- VIDEO 2 + CÂU CHÚC TIẾP -->
+<video id="video2" class="video hidden" src="dreamy-video.mp4" loop muted></video>
+<div class="greeting-box" id="greetings2">
+  <div class="line" id="greet4">💫 Mong những điều tốt đẹp nhất luôn đến với cậu.</div>
+  <div class="line" id="greet5">🌸 Cậu xứng đáng được yêu thương mỗi ngày.</div>
+  <div class="line" id="greet6">🌈 Mong cuộc sống của cậu luôn dịu dàng và ấm áp.</div>
+  <div class="line" id="greet7">🕊️ Chúc cậu luôn mỉm cười như ánh mặt trời.</div>
+</div>
+
+<!-- NÚT MỞ QUÀ -->
+<div id="gift-btn" class="hidden">
+  <button class="glow-btn" id="gift-open">🎁 Món quà dành riêng cho cậu</button>
+</div>
+
+<!-- CÁC HÌNH ẢNH QUÀ TẶNG -->
+<div id="gift-images" class="hidden">
+  <img src="gift-image.png" alt="Gift 1">
+  <img src="gift-image1.jpeg" alt="Gift 2">
+  <img src="gift-image2.jpeg" alt="Gift 3">
+  <img src="gift-image3.webp" alt="Gift 4">
+  <img src="gift-image4.webp" alt="Gift 5">
+</div>
+
+<!-- NHẠC PHÁT LẶP -->
+<audio id="music" src="you-vietra.mp3" loop></audio>
+
+<!-- PHẢN HỒI -->
+<div id="final-message" class="hidden">
+  <p>💌 Bạn có thể để lại vài lời cho Milk hoặc Fuyuhi:</p>
+  <input type="text" id="reply-name" placeholder="Milk hoặc Fuyuhi">
+  <br>
+  <textarea id="reply-message" placeholder="Lời nhắn..." rows="3" cols="40"></textarea>
+  <br>
+  <button class="glow-btn" onclick="saveReply()">Gửi phản hồi</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
