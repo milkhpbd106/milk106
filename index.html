@@ -11,10 +11,10 @@
   <div id="lock-screen">
     <div id="cloud-container"></div>
     <div class="lock-box">
-      <h2 id="countdown-title">Kiên nhẫn một chút nhé, tôi có chút chậm...</h2>
+      <h2 id="countdown-title">Kiên nhẫn một chút nhé, tôi có chút chậm... 😔</h2>
       <div id="countdown">10</div>
       <input id="password-input" type="password" placeholder="Nhập mật khẩu..." disabled />
-      <button id="unlock-btn" onclick="checkPassword()" disabled>Mở quà ✨</button>
+      <button id="unlock-btn" onclick="checkPassword()" disabled class="glow-btn">Mở quà ✨</button>
       <div id="lock-message"></div>
     </div>
   </div>
@@ -27,17 +27,17 @@
     <video id="loop-video" class="video hidden" src="dreamy-video.mp4" loop></video>
 
     <div id="greetings" class="greeting-box">
-      <p class="line"></p>
-      <p class="line"></p>
-      <p class="line"></p>
+      <p class="line">🎉 Chúc mừng sinh nhật cậu!</p>
+      <p class="line">🌟 Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.</p>
+      <p class="line">🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu nhé!</p>
     </div>
     <div id="more-greetings" class="greeting-box hidden">
-      <p class="line"></p>
-      <p class="line"></p>
+      <p class="line">💖 Mong rằng những điều nhỏ xinh này sẽ làm cậu mỉm cười.</p>
+      <p class="line">🌈 Mãi mãi yêu thương và nhớ về nhau thật nhiều nha.</p>
     </div>
 
     <div id="gift-btn" class="hidden">
-      <button onclick="toggleGift()">🎁 Món quà dành riêng cho cậu</button>
+      <button onclick="toggleGift()" class="glow-btn">🎁 Món quà dành riêng cho cậu</button>
     </div>
 
     <div id="gift-images" class="gift-box hidden">
@@ -49,14 +49,14 @@
     </div>
 
     <div id="final-message" class="hidden">
-      <p>Tớ mong cậu thích những điều nhỏ xinh này 💖</p>
+      <p>🌸 Tớ mong cậu thích những điều nhỏ xinh này 💖</p>
       <input id="reply-name" type="text" placeholder="Tên cậu..." />
       <textarea id="reply-message" placeholder="Lời nhắn của cậu..."></textarea>
-      <button onclick="sendReply()">Gửi lại lời nhắn 💌</button>
+      <button onclick="sendReply()">💌 Gửi lại lời nhắn</button>
     </div>
 
-    <div id="arrow-left" class="arrow hidden">⬅</div>
-    <div id="arrow-right" class="arrow hidden">➡</div>
+    <div id="arrow-left" class="arrow hidden" onclick="goToIntroVideo()">⬅</div>
+    <div id="arrow-right" class="arrow hidden" onclick="goToLoopVideo()">➡</div>
   </div>
 
   <script src="script.js"></script>
