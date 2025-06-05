@@ -3,33 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Món quà sinh nhật</title>
+  <title>Milk's Gift</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="cloud-bg"></div>
   <div id="password-screen">
-    <h1 class="fade-in-text">Mở quà</h1>
-    <div id="countdown">10</div>
-    <input type="password" id="password" placeholder="Nhập mật khẩu..." disabled />
-    <button id="submit">Vào xem quà</button>
-    <div id="message"></div>
+    <img src="cloud.nen.jpg" class="bg-cloud" />
+    <div id="clouds">
+      <img src="images.png" class="cloud small" />
+      <img src="images.png" class="cloud medium" />
+      <img src="images.png" class="cloud large" />
+    </div>
+    <div id="login-box">
+      <h2 class="shiny-text">Mở quà 🎁</h2>
+      <p>Chờ chút nhé... còn <span id="countdown">10</span> giây</p>
+      <input type="password" id="password" placeholder="Nhập mật khẩu..." disabled />
+      <button id="submit">Mở khoá</button>
+      <p id="message"></p>
+    </div>
   </div>
 
   <div id="main-content" class="hidden">
     <audio id="bg-music" src="you-vietra.mp3" loop></audio>
-    <video id="video1" src="milkdream.mp4" autoplay muted></video>
+    <video id="video1" src="milkdream.mp4" class="video" muted></video>
+    <video id="video2" src="dreamy-video.mp4" class="video hidden" muted loop></video>
+
     <div id="wishes">
-      <p class="wish">Chúc mừng sinh nhật cậu 🎉</p>
-      <p class="wish">Cảm ơn vì đã luôn là ánh sáng diễu dàng trong thế giới của tớ 💖</p>
-      <p class="wish">Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu 🎁</p>
+      <p class="wish-text">🎉 Chúc mừng sinh nhật cậu!</p>
+      <p class="wish-text">💫 Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.</p>
+      <p class="wish-text">🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu</p>
+      <p class="wish-text">💜 Chúc cậu một tuổi mới thật đáng yêu như chính cậu 💜</p>
+      <p class="wish-text">🌸 Luôn mỉm cười thật rạng rỡ và bình yên nhé 🌸</p>
     </div>
-    <video id="video2" src="dreamy-video.mp4" loop muted></video>
-    <div id="wishes2">
-      <p class="wish fade-glow">Mọi ngày của cậu luôn rạng rỡ 💫</p>
-      <p class="wish fade-glow">Tớ luôn bên cạnh cậu đó nha 🌸</p>
-    </div>
-    <button id="openGift">Món quà dành riêng cho cậu ✨</button>
+
+    <button id="openGift">Món quà dành riêng cho cậu 🎀</button>
+
     <div id="gift-box" class="hidden">
       <img src="gift-image.png" />
       <img src="gift-image1.jpeg" />
@@ -37,13 +45,14 @@
       <img src="gift-image3.webp" />
       <img src="gift-image4.webp" />
     </div>
-    <div id="feedback">
-      <p>Con muốn gửi lời nhắn tới cậu 💌</p>
-      <textarea placeholder="Nhập phản hồi Milk hoặc Fuyuhi..."></textarea>
-      <button>Gửi</button>
-      <button class="close">Huỷ</button>
+
+    <div id="feedback-section" class="hidden">
+      <p>💌 Tớ mong là cậu đã thích món quà này 💌</p>
+      <button id="milk-btn">Phản hồi với Milk</button>
+      <button id="fuyuhi-btn">Phản hồi với Fuyuhi</button>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
