@@ -1,58 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Milk's Gift</title>
+  <title>Món Quà Sinh Nhật</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="password-screen">
-    <img src="cloud.nen.jpg" class="bg-cloud" />
-    <div id="clouds">
-      <img src="images.png" class="cloud small" />
-      <img src="images.png" class="cloud medium" />
-      <img src="images.png" class="cloud large" />
-    </div>
-    <div id="login-box">
-      <h2 class="shiny-text">Mở quà 🎁</h2>
-      <p>Chờ chút nhé... còn <span id="countdown">10</span> giây</p>
-      <input type="password" id="password" placeholder="Nhập mật khẩu..." disabled />
-      <button id="submit">Mở khoá</button>
-      <p id="message"></p>
-    </div>
+    <div id="clouds"></div>
+    <h2 id="message">🎉 Hôm nay là ngày gì nào 💖</h2>
+    <p id="countdown"></p>
+    <input id="password" type="password" placeholder="Nhập mật khẩu..." />
+    <button id="submit">Mở quà</button>
   </div>
 
   <div id="main-content" class="hidden">
-    <audio id="bg-music" src="you-vietra.mp3" loop></audio>
-    <video id="video1" src="milkdream.mp4" class="video" muted></video>
-    <video id="video2" src="dreamy-video.mp4" class="video hidden" muted loop></video>
+    <video id="video1" class="hidden" src="milkdream.mp4" muted></video>
+    <video id="video2" class="hidden" src="dreamy-video.mp4" muted></video>
 
-    <div id="wishes">
-      <p class="wish-text">🎉 Chúc mừng sinh nhật cậu!</p>
-      <p class="wish-text">💫 Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ.</p>
-      <p class="wish-text">🎁 Hãy nhấp vào đây để mở món quà tớ dành riêng cho cậu</p>
-      <p class="wish-text">💜 Chúc cậu một tuổi mới thật đáng yêu như chính cậu 💜</p>
-      <p class="wish-text">🌸 Luôn mỉm cười thật rạng rỡ và bình yên nhé 🌸</p>
-    </div>
+    <div class="wish-text hidden">🎂 Chúc mừng sinh nhật cậu 💖</div>
+    <div class="wish-text hidden">🌟 Cảm ơn vì đã luôn là ánh sáng dịu dàng 💫</div>
+    <div class="wish-text hidden">🎁 Hãy nhấp vào đây để mở món quà nhé 🎀</div>
 
-    <button id="openGift">Món quà dành riêng cho cậu 🎀</button>
+    <div class="wish-text hidden">✨ Cậu luôn là người rất đặc biệt ✨</div>
+    <div class="wish-text hidden">🌸 Mong mọi điều tốt đẹp đến với cậu 🌈</div>
+
+    <button id="openGift" class="hidden">🎁 Món quà dành riêng cho cậu</button>
 
     <div id="gift-box" class="hidden">
       <img src="gift-image.png" />
-      <img src="gift-image1.jpeg" />
-      <img src="gift-image2.jpeg" />
-      <img src="gift-image3.webp" />
-      <img src="gift-image4.webp" />
+      <img src="gift-image1.png" />
+      <img src="gift-image2.png" />
+      <img src="gift-image3.png" />
+      <img src="gift-image4.png" />
     </div>
 
     <div id="feedback-section" class="hidden">
-      <p>💌 Tớ mong là cậu đã thích món quà này 💌</p>
-      <button id="milk-btn">Phản hồi với Milk</button>
-      <button id="fuyuhi-btn">Phản hồi với Fuyuhi</button>
+      <p>💌 Cảm ơn cậu đã xem món quà 💕</p>
+      <button onclick="alert('Phản hồi của cậu đã được ghi nhận!')">Gửi phản hồi</button>
+      <button onclick="document.getElementById('feedback-section').classList.add('hidden')">Đóng</button>
     </div>
+
+    <div id="left-arrow" class="nav-arrow hidden">⬅</div>
+    <div id="right-arrow" class="nav-arrow hidden">➡</div>
   </div>
 
+  <audio id="bg-music" src="you-vietra.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
