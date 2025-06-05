@@ -1,77 +1,102 @@
-const passwordForm = document.getElementById("password-form");
-const passwordInput = document.getElementById("password");
-const errorMessage = document.getElementById("error-message");
-const countdownMessage = document.getElementById("countdown-message");
-const countdownTimer = document.getElementById("countdown-timer");
+// script.js
 
-const video1 = document.getElementById("video1");
-const video2 = document.getElementById("video2");
-const videoSection = document.getElementById("video-section");
-const messagesContainer = document.getElementById("messages");
-const giftButton = document.getElementById("gift-btn");
-const giftGallery = document.getElementById("gift-gallery");
-const bgMusic = document.getElementById("bg-music");
-const feedback = document.getElementById("feedback");
+const passwordInput = document.getElementById("password-input");
+const unlockBtn = document.getElementById("unlock-btn");
+const lockMessage = document.getElementById("lock-message");
+const countdown = document.getElementById("countdown");
+const music = document.getElementById("bg-music");
 
-let countdown = 10;
+let counter = 10;
 
-const firstMessages = [
-  "🌈 Chúc mừng sinh nhật cậu 💖",
-  "✨ Cảm ơn vì đã luôn là ánh sáng dịu dàng trong thế giới của tớ 🌸",
-  "🎁 Hãy nhấn vào đây để mở món quà nhỏ xíu tớ dành riêng cho cậu 🌷"
-];
+// Đếm ngược
+const countdownInterval = setInterval(() => {
+  counter--;
+  countdown.textContent = counter;
+  if (counter <= 0) {
+    clearInterval(countdownInterval);
+    passwordInput.disabled = false;
+    unlockBtn.disabled = false;
+    countdown.style.display = "none";
+  }
+}, 1000);
 
-const secondMessages = [
-  "🌸 Happy Birthday Milk 💖",
-  "🌈 Let’s step into a dreamy world together ✨",
-  "🌼 Mong mọi điều dịu dàng nhất luôn ở bên cậu 💕",
-  "💫 Hy vọng cậu sẽ luôn cảm thấy được yêu thương và mơ mộng mãi mãi 🍃"
-];
-
-function startCountdown() {
-  const interval = setInterval(() => {
-    countdown--;
-    countdownTimer.textContent = countdown;
-
-    if (countdown > 5) {
-      countdownMessage.textContent = "⏳ Kiên nhẫn một chút nhé tôi có chút chậm 😅";
-    } else if (countdown > 0) {
-      countdownMessage.textContent = "🎈 Hôm nay là ngày gì nào?";
-    } else {
-      clearInterval(interval);
-      countdownMessage.textContent = "";
-      countdownTimer.textContent = "";
-      passwordForm.classList.remove("hidden");
-    }
-  }, 1000);
-}
-
-startCountdown();
-
-passwordForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+// Xử lý mở khóa
+unlockBtn.addEventListener("click", () => {
   const entered = passwordInput.value.trim();
   if (entered === "Milk10/6") {
-    document.getElementById("password-container").classList.add("hidden");
-    videoSection.classList.remove("hidden");
-    video1.play();
-    bgMusic.play();
-
-    showFirstMessages();
-
-    setTimeout(() => {
-      video1.classList.add("hidden");
-      video2.classList.remove("hidden");
-      showSecondMessages();
-    }, 10000); // chuyển sau 10s
+    document.getElementById("lock-screen").style.display = "none";
+    showFirstVideo();
+    music.play();
   } else {
-    errorMessage.textContent = "❌ Sai mật khẩu rồi 😢";
+    lockMessage.textContent = "Sai mật khẩu rồi 😢";
   }
 });
 
-function showFirstMessages() {
-  let i = 0;
-  const interval = setInterval(() => {
-    if (i < firstMessages.length) {
-      messagesContainer.textContent = firstMessages[i++];
-   
+// Phát video đầu tiên
+function showFirstVideo() {
+  const video1 = document.createElement("video");
+  video1.src = "milkdream.mp4";
+  video1.autoplay = true;
+  video1.muted = false;
+  video1.className = "video";
+  document.body.appendChild(video1);
+
+  // Sau 10s, chuyển sang video thứ hai
+  setTimeout(() => {
+    video1.remove();
+    showSecondVideo();
+  }, 10000);
+}
+
+// Phát video thứ hai
+function showSecondVideo() {
+  const video2 = document.createElement("video");
+  video2.src = "dreamy-video.mp4";
+  video2.autoplay = true;
+  video2.loop = true;
+  video2.className = "video";
+  document.body.appendChild(video2);
+
+  // Gợi ý tiếp theo: hiển thị greeting, nút mở quà sau 5s
+  setTimeout(() => {
+    const greeting = document.createElement("div");
+    greeting.className = "greeting-box";
+    greeting.innerHTML = `
+      <p>Chúc mừng sinh nhật 🎉</p>
+      <p>Đây là món quà nhỏ gửi tặng bạn 💝</p>
+    `;
+    document.body.appendChild(greeting);
+
+    const giftBtn = document.createElement("div");
+    giftBtn.id = "gift-btn";
+    giftBtn.innerHTML = `<button onclick="showGifts()">Mở quà 🎁</button>`;
+    document.body.appendChild(giftBtn);
+  }, 5000);
+}
+
+// Hiển thị các ảnh quà tặng
+function showGifts() {
+  document.getElementById("gift-btn").style.display = "none";
+  const giftBox = document.createElement("div");
+  giftBox.className = "gift-box";
+  const images = [
+    "gift-image.png",
+    "gift-image1.jpeg",
+    "gift-image2.jpeg",
+    "gift-image3.webp",
+    "gift-image4.webp"
+  ];
+  giftBox.innerHTML = images
+    .map((src) => `<img src="${src}" alt="Quà">`)
+    .join("");
+  document.body.appendChild(giftBox);
+
+  // Thêm lời chúc cuối cùng
+  const finalMessage = document.createElement("div");
+  finalMessage.id = "final-message";
+  finalMessage.innerHTML = `
+    <p>Cảm ơn bạn đã mở hết quà 🎁</p>
+    <p>Hy vọng bạn sẽ có một ngày sinh nhật thật ấm áp và đáng nhớ 💕</p>
+  `;
+  document.body.appendChild(finalMessage);
+}
